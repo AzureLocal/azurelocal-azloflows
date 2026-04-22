@@ -14,6 +14,7 @@ import ShapePalette from '@/features/palette/ShapePalette';
 import ScenarioToolbar from '@/features/scenarios/ScenarioToolbar';
 import type { ViewportSize } from '@/lib/geometry/iso';
 import { saveDocument } from '@/lib/serialization/storage';
+import { applyUrlParams } from '@/lib/urlParams';
 import { useEditorStore } from '@/state/useEditorStore';
 
 const SAVE_DEBOUNCE_MS = 400;
@@ -37,6 +38,11 @@ export default function App() {
   useEffect(() => {
     window.document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
+
+  // Apply URL parameters once on mount (for iframe / deep-link integrations).
+  useEffect(() => {
+    void applyUrlParams();
+  }, []);
 
   return (
     <>
