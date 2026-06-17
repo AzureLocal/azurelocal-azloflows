@@ -9,3 +9,8 @@ eslint-report.json
 .DS_Store
 Thumbs.db
 *.log
+
+
+# Claude Code local settings (logs and machine-local overrides only)
+.claude/logs/
+.claude/settings.local.json
