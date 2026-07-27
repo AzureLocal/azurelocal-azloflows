@@ -195,6 +195,18 @@ export default function TopToolbar({ canvasRef, viewport }: TopToolbarProps) {
 
       {/* ── File & Export menus ──── */}
       <div className="toolbar-group">
+        <Button variant="ghost" title="Return to Landing Page & Docs" onClick={() => useEditorStore.getState().setActiveView('landing')}>
+          🏠 Home / Docs
+        </Button>
+        <Button variant="ghost" title="Start Guided Architecture Wizard" onClick={() => useEditorStore.getState().setWizardOpen(true)}>
+          🧙 Guided Wizard
+        </Button>
+      </div>
+
+      <div className="tb-divider" />
+
+      {/* ── File & Export menus ──── */}
+      <div className="toolbar-group">
         <ToolbarMenu label="File" icon={Icon.file} items={fileItems as any} />
         <ToolbarMenu label="Export" icon={Icon.exportIcon} items={exportItems as any} />
       </div>

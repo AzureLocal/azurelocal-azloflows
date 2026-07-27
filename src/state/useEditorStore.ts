@@ -9,6 +9,7 @@ import { buildConnectorPath } from '@/lib/geometry/routing';
 import { companionPalette, hexToRgba, palette } from '@/lib/rendering/tokens';
 import { cloneDocument, withCommittedHistory, type HistoryState } from '@/state/history';
 import type {
+  AppView,
   AreaEntity,
   CameraState,
   ConnectorEntity,
@@ -44,7 +45,24 @@ type ClipboardPayload =
 
 const CLIPBOARD_MARKER = 'azloflows:clipboard:';
 
+export interface WizardTopologyConfig {
+  nodeCount: 2 | 4 | 8;
+  serverModel: string;
+  switchModel: string;
+  oobConsole: string;
+  vlanProfile: {
+    mgmtVlan: number;
+    computeVlan: number;
+    storageVlan1: number;
+    storageVlan2: number;
+    mtu: number;
+  };
+  cableMedia: 'DAC 25G' | 'MMF 100G';
+}
+
 interface EditorStore {
+  activeView: AppView;
+  wizardOpen: boolean;
   document: DiagramDocument;
   selection: SelectionState;
   camera: CameraState;
@@ -60,6 +78,9 @@ interface EditorStore {
   activeFlowSources: Set<FlowSource>;
   activeFlowTypes: Set<FlowType>;
   clipboard: ClipboardPayload | null;
+  setActiveView: (view: AppView) => void;
+  setWizardOpen: (open: boolean) => void;
+  buildWizardTopology: (config: WizardTopologyConfig) => void;
   toggleTheme: () => void;
   setViewMode: (mode: ViewMode) => void;
   setActiveScenario: (id: ScenarioId | null) => void;
@@ -215,6 +236,8 @@ function clampNodeToArea(node: NodeEntity, area: AreaEntity): NodeEntity {
 }
 
 export const useEditorStore = create<EditorStore>((set: any, get: any) => ({
+  activeView: 'landing',
+  wizardOpen: false,
   document: createBaseDocument(),
   selection: { type: null, ids: [] },
   camera: defaultCamera,
@@ -230,6 +253,190 @@ export const useEditorStore = create<EditorStore>((set: any, get: any) => ({
   activeFlowSources: new Set(FLOW_SOURCES.map((f) => f.id)),
   activeFlowTypes: new Set(FLOW_TYPES.map((f) => f.id)),
   clipboard: null,
+  setActiveView: (view) => set({ activeView: view }),
+  setWizardOpen: (open) => set({ wizardOpen: open }),
+  buildWizardTopology: (config) => {
+    const newDoc = createBaseDocument();
+    newDoc.name = `Azure Local ${config.nodeCount}-Node ${config.serverModel} Architecture`;
+    
+    // 1. Create OOB Switch / Console
+    const oobId = 'node-oob-1';
+    newDoc.nodes.push({
+      id: oobId,
+      type: 'node',
+      shape: config.oobConsole.includes('Opengear') ? 'opengearConsole' : 'oobSwitch',
+      title: config.oobConsole,
+      subtitle: 'Out-of-Band Management',
+      x: 80,
+      y: 80,
+      width: 340,
+      height: 90,
+      fill: '#0f172a',
+      glowColor: '#00e5ff',
+      hardwareProfileId: config.oobConsole.includes('Opengear') ? 'opengear-om2248' : 'dell-s3148p',
+      notes: 'Out-of-band management console server',
+      zIndex: 10,
+    });
+
+    // 2. Create ToR Switch A & B
+    const switchAId = 'node-tor-a';
+    const switchBId = 'node-tor-b';
+    newDoc.nodes.push({
+      id: switchAId,
+      type: 'node',
+      shape: 'vendorSwitch',
+      title: `${config.switchModel} (ToR-A)`,
+      subtitle: 'Top-of-Rack Switch A',
+      x: 480,
+      y: 80,
+      width: 380,
+      height: 95,
+      fill: '#1e293b',
+      glowColor: '#3b82f6',
+      hardwareProfileId: config.switchModel.includes('Arista') ? 'arista-7050sx3' : 'cisco-n9k-93180',
+      zIndex: 10,
+    });
+    newDoc.nodes.push({
+      id: switchBId,
+      type: 'node',
+      shape: 'vendorSwitch',
+      title: `${config.switchModel} (ToR-B)`,
+      subtitle: 'Top-of-Rack Switch B',
+      x: 900,
+      y: 80,
+      width: 380,
+      height: 95,
+      fill: '#1e293b',
+      glowColor: '#3b82f6',
+      hardwareProfileId: config.switchModel.includes('Arista') ? 'arista-7050sx3' : 'cisco-n9k-93180',
+      zIndex: 10,
+    });
+
+    // 3. Create Logical HCI Areas
+    newDoc.areas.push({
+      id: 'area-mgmt',
+      type: 'area',
+      label: 'Management Network',
+      vlanId: config.vlanProfile.mgmtVlan,
+      mtu: 1500,
+      cidr: '10.0.10.0/24',
+      fill: 'rgba(59, 130, 246, 0.12)',
+      borderColor: '#3b82f6',
+      glowColor: '#3b82f6',
+      x: 60,
+      y: 220,
+      width: 1260,
+      height: 140,
+      locked: false,
+      zIndex: 1,
+    });
+
+    newDoc.areas.push({
+      id: 'area-storage',
+      type: 'area',
+      label: 'Storage & RDMA Isolation',
+      vlanId: config.vlanProfile.storageVlan1,
+      mtu: config.vlanProfile.mtu,
+      cidr: '172.16.10.0/24',
+      fill: 'rgba(168, 85, 247, 0.12)',
+      borderColor: '#a855f7',
+      glowColor: '#a855f7',
+      x: 60,
+      y: 380,
+      width: 1260,
+      height: 140,
+      locked: false,
+      zIndex: 2,
+    });
+
+    // 4. Create Server Nodes
+    const startX = 100;
+    const spacingX = Math.min(280, 1100 / config.nodeCount);
+    for (let i = 0; i < config.nodeCount; i++) {
+      const nId = `node-server-${i + 1}`;
+      newDoc.nodes.push({
+        id: nId,
+        type: 'node',
+        shape: 'serverNode',
+        title: `Node-${i + 1} (${config.serverModel})`,
+        subtitle: `Dell PowerEdge ${config.serverModel}`,
+        x: startX + i * spacingX,
+        y: 560,
+        width: 250,
+        height: 110,
+        fill: '#1e293b',
+        glowColor: '#00e5ff',
+        hardwareProfileId: config.serverModel.includes('770') ? 'dell-ax770' : config.serverModel.includes('670') ? 'dell-ax670' : config.serverModel.includes('660') ? 'dell-ax660' : 'dell-ax760',
+        zIndex: 20 + i,
+      });
+
+      // Wire to ToR Switch A
+      newDoc.connectors.push({
+        id: `conn-tor-a-${i + 1}`,
+        type: 'connector',
+        sourceId: nId,
+        sourceAnchor: 'top-1',
+        targetId: switchAId,
+        targetAnchor: `bottom-${i + 1}`,
+        label: `pNIC1 -> ToR-A (${config.cableMedia})`,
+        color: '#3b82f6',
+        style: 'solid',
+        cableType: config.cableMedia.includes('100G') ? 'mmf' : 'dac',
+        vlanId: config.vlanProfile.computeVlan,
+        waypoints: [],
+        zIndex: 5,
+      });
+
+      // Wire to ToR Switch B
+      newDoc.connectors.push({
+        id: `conn-tor-b-${i + 1}`,
+        type: 'connector',
+        sourceId: nId,
+        sourceAnchor: 'top-2',
+        targetId: switchBId,
+        targetAnchor: `bottom-${i + 1}`,
+        label: `pNIC2 -> ToR-B (${config.cableMedia})`,
+        color: '#3b82f6',
+        style: 'solid',
+        cableType: config.cableMedia.includes('100G') ? 'mmf' : 'dac',
+        vlanId: config.vlanProfile.computeVlan,
+        waypoints: [],
+        zIndex: 5,
+      });
+
+      // Wire iDRAC to OOB Console
+      newDoc.connectors.push({
+        id: `conn-oob-${i + 1}`,
+        type: 'connector',
+        sourceId: nId,
+        sourceAnchor: 'top-3',
+        targetId: oobId,
+        targetAnchor: `bottom-${i + 1}`,
+        label: `iDRAC -> OOB Console (Cat6A)`,
+        color: '#00e5ff',
+        style: 'dashed',
+        cableType: 'cat6a',
+        vlanId: config.vlanProfile.mgmtVlan,
+        waypoints: [],
+        zIndex: 5,
+      });
+    }
+
+    const history = withCommittedHistory({ past: [], future: [] }, newDoc);
+    set({
+      document: newDoc,
+      history,
+      activeView: 'designer',
+      wizardOpen: false,
+      toasts: [
+        {
+          id: `toast-${Date.now()}`,
+          tone: 'success',
+          message: `Topology generated: ${config.nodeCount}-Node ${config.serverModel} cluster with dual ${config.switchModel} ToR switches!`,
+        },
+      ],
+    });
+  },
   setViewMode: (mode) => set({ viewMode: mode }),
   toggleTheme: () => set((state) => ({ theme: state.theme === 'dark' ? 'light' : 'dark' })),
   setActiveScenario: (id) => set({ activeScenario: id, activeFlowSources: new Set<FlowSource>(), activeFlowTypes: new Set<FlowType>() }),

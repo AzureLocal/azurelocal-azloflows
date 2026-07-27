@@ -18,6 +18,7 @@ export type NodeShape =
   | 'storageEnclosure';
 export type ConnectorStyle = 'solid' | 'dashed' | 'animated';
 export type ToolMode = 'select' | 'pan';
+export type AppView = 'landing' | 'designer';
 export type AnchorSide = 'top' | 'right' | 'bottom' | 'left';
 export type LabelAnchorCorner = 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right';
 export type AnchorId = `${AnchorSide}-${number}`;

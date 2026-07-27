@@ -65,10 +65,22 @@ function matchScenarioFile(entries: ScenarioManifestEntry[], slug: string): Scen
 export async function applyUrlParams(): Promise<boolean> {
   if (typeof window === 'undefined') return false;
   const params = new URLSearchParams(window.location.search);
+  const viewParam = params.get('view');
+  const wizardParam = params.get('wizard');
   const scenarioParam = params.get('scenario');
   const configParam = params.get('config');
   const sourcesParam = parseList(params.get('sources'));
   const typesParam = parseList(params.get('types'));
+
+  if (viewParam === 'designer' || viewParam === 'canvas' || scenarioParam || configParam) {
+    useEditorStore.getState().setActiveView('designer');
+  } else if (viewParam === 'landing' || viewParam === 'home') {
+    useEditorStore.getState().setActiveView('landing');
+  }
+
+  if (wizardParam === 'true' || wizardParam === '1') {
+    useEditorStore.getState().setWizardOpen(true);
+  }
 
   if (!scenarioParam && !configParam && sourcesParam.length === 0 && typesParam.length === 0) {
     return false;
