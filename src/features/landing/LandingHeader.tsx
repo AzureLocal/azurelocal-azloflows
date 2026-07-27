@@ -1,6 +1,6 @@
 import { useEditorStore } from '@/state/useEditorStore';
 
-export type LandingTab = 'about' | 'docs' | 'changelog' | 'roadmap';
+export type LandingTab = 'about' | 'releasenotes' | 'changelog' | 'roadmap' | 'credits' | 'docs';
 
 interface LandingHeaderProps {
   activeTab: LandingTab;
@@ -13,19 +13,22 @@ export default function LandingHeader({ activeTab, setActiveTab }: LandingHeader
   const theme = useEditorStore((state) => state.theme);
   const toggleTheme = useEditorStore((state) => state.toggleTheme);
 
+  const isLight = theme === 'light';
+
   return (
     <header
       style={{
         position: 'sticky',
         top: 0,
         zIndex: 100,
-        background: 'rgba(10, 15, 26, 0.85)',
+        background: isLight ? 'rgba(255, 255, 255, 0.92)' : 'rgba(10, 15, 26, 0.85)',
         backdropFilter: 'blur(16px)',
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
+        borderBottom: isLight ? '1px solid rgba(0,0,0,0.08)' : '1px solid rgba(255,255,255,0.08)',
         padding: '16px 32px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
+        transition: 'all 0.3s ease',
       }}
     >
       {/* Brand Logo */}
@@ -48,22 +51,24 @@ export default function LandingHeader({ activeTab, setActiveTab }: LandingHeader
           ⚡
         </div>
         <div>
-          <div style={{ fontSize: '18px', fontWeight: 900, letterSpacing: '-0.5px', color: '#ffffff' }}>
+          <div style={{ fontSize: '18px', fontWeight: 900, letterSpacing: '-0.5px', color: isLight ? '#0f172a' : '#ffffff' }}>
             AzLoFlows
           </div>
-          <div style={{ fontSize: '10px', fontWeight: 700, color: '#00e5ff', textTransform: 'uppercase', letterSpacing: '1px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, color: isLight ? '#0284c7' : '#00e5ff', textTransform: 'uppercase', letterSpacing: '1px' }}>
             Azure Local Architecture Portal
           </div>
         </div>
       </div>
 
       {/* Nav Tabs */}
-      <nav style={{ display: 'flex', gap: '8px', background: 'rgba(255,255,255,0.03)', padding: '4px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
+      <nav style={{ display: 'flex', gap: '8px', background: isLight ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.03)', padding: '4px', borderRadius: '10px', border: isLight ? '1px solid rgba(0,0,0,0.06)' : '1px solid rgba(255,255,255,0.06)' }}>
         {[
-          { id: 'about', label: 'ℹ️ About & Credits' },
+          { id: 'about', label: 'ℹ️ About' },
+          { id: 'releasenotes', label: '📋 Release Notes' },
+          { id: 'changelog', label: '📜 Change Log' },
+          { id: 'roadmap', label: '🗺️ Roadmap' },
+          { id: 'credits', label: '❤️ Credits' },
           { id: 'docs', label: '📚 How-To & Docs' },
-          { id: 'changelog', label: '📜 Release Changelog' },
-          { id: 'roadmap', label: '🗺️ Product Roadmap' },
         ].map((tab) => (
           <button
             key={tab.id}
@@ -72,8 +77,8 @@ export default function LandingHeader({ activeTab, setActiveTab }: LandingHeader
               padding: '8px 16px',
               borderRadius: '8px',
               border: 'none',
-              background: activeTab === tab.id ? 'rgba(0, 229, 255, 0.15)' : 'transparent',
-              color: activeTab === tab.id ? '#00e5ff' : '#94a3b8',
+              background: activeTab === tab.id ? (isLight ? 'rgba(2, 132, 199, 0.12)' : 'rgba(0, 229, 255, 0.15)') : 'transparent',
+              color: activeTab === tab.id ? (isLight ? '#0284c7' : '#00e5ff') : (isLight ? '#475569' : '#94a3b8'),
               fontWeight: activeTab === tab.id ? 700 : 500,
               fontSize: '13px',
               cursor: 'pointer',
