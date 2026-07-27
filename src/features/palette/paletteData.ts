@@ -227,14 +227,14 @@ const analyticsPanelIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0
   <line x1="56" y1="6" x2="56" y2="44" stroke="rgba(77,141,255,0.9)" stroke-width="1.5"/>
 </svg>`;
 
-export interface PaletteShape {
+export type PaletteShape = {
   id: string;
   title: string;
   /** Inline SVG markup (64×64 viewBox) showing an isometric preview */
   icon: string;
   /** For node-variant shapes, specifies the NodeShape to create */
   nodeShape?: NodeShape;
-}
+};
 
 export const paletteShapes: PaletteShape[] = [
   { id: 'area', title: 'Flat Area', icon: areaIcon },
