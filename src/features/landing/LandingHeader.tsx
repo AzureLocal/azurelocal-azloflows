@@ -1,8 +1,10 @@
 import { useEditorStore } from '@/state/useEditorStore';
 
+export type LandingTab = 'about' | 'docs' | 'changelog' | 'roadmap';
+
 interface LandingHeaderProps {
-  activeTab: 'overview' | 'docs' | 'changelog' | 'roadmap';
-  setActiveTab: (tab: 'overview' | 'docs' | 'changelog' | 'roadmap') => void;
+  activeTab: LandingTab;
+  setActiveTab: (tab: LandingTab) => void;
 }
 
 export default function LandingHeader({ activeTab, setActiveTab }: LandingHeaderProps) {
@@ -27,7 +29,7 @@ export default function LandingHeader({ activeTab, setActiveTab }: LandingHeader
       }}
     >
       {/* Brand Logo */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }} onClick={() => setActiveTab('overview')}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }} onClick={() => setActiveTab('about')}>
         <div
           style={{
             width: '36px',
@@ -58,14 +60,14 @@ export default function LandingHeader({ activeTab, setActiveTab }: LandingHeader
       {/* Nav Tabs */}
       <nav style={{ display: 'flex', gap: '8px', background: 'rgba(255,255,255,0.03)', padding: '4px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
         {[
-          { id: 'overview', label: 'Overview' },
-          { id: 'docs', label: 'How-To & Docs' },
-          { id: 'changelog', label: 'Changelog' },
-          { id: 'roadmap', label: 'Roadmap' },
+          { id: 'about', label: 'ℹ️ About & Credits' },
+          { id: 'docs', label: '📚 How-To & Docs' },
+          { id: 'changelog', label: '📜 Release Changelog' },
+          { id: 'roadmap', label: '🗺️ Product Roadmap' },
         ].map((tab) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
+            onClick={() => setActiveTab(tab.id as LandingTab)}
             style={{
               padding: '8px 16px',
               borderRadius: '8px',

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useEditorStore } from '@/state/useEditorStore';
-import LandingHeader from '@/features/landing/LandingHeader';
+import LandingHeader, { type LandingTab } from '@/features/landing/LandingHeader';
 
 export default function LandingPage() {
-  const [activeTab, setActiveTab] = useState<'overview' | 'docs' | 'changelog' | 'roadmap'>('overview');
+  const [activeTab, setActiveTab] = useState<LandingTab>('about');
   const [docsCategory, setDocsCategory] = useState<'cabling' | 'logical' | 'auditor' | 'exporter'>('cabling');
   const setActiveView = useEditorStore((state) => state.setActiveView);
   const setWizardOpen = useEditorStore((state) => state.setWizardOpen);
@@ -48,8 +48,8 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* OVERVIEW TAB */}
-        {activeTab === 'overview' && (
+        {/* ABOUT & CREDITS TAB */}
+        {activeTab === 'about' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
             {/* Hero Section */}
             <div style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '20px' }}>
