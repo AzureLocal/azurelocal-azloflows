@@ -6,7 +6,7 @@ import { fileURLToPath, URL } from 'node:url';
 import pkg from './package.json' assert { type: 'json' };
 
 export default defineConfig({
-  base: '/AzLoFlows/',
+  base: './',
   define: {
     __APP_VERSION__: JSON.stringify(pkg.version),
   },
