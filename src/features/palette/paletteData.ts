@@ -2,7 +2,7 @@ import { palette, companionPalette } from '@/lib/rendering/tokens';
 import type { NodeShape } from '@/types/document';
 
 export interface PaletteShape {
-  id: NodeShape | 'area' | 'text' | 'pipe';
+  id: NodeShape | 'node' | 'area' | 'text' | 'pipe';
   title: string;
   /** Inline SVG markup (64×64 viewBox) showing an isometric preview */
   icon: string;
