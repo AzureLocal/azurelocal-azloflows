@@ -6,7 +6,7 @@ import { fileURLToPath, URL } from 'node:url';
 import pkg from './package.json' with { type: 'json' };
 
 export default defineConfig({
-  base: '/azurelocal-draftsman/',
+  base: './',
   define: {
     __APP_VERSION__: JSON.stringify(pkg.version),
   },

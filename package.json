@@ -4,7 +4,7 @@
   "version": "0.9.0",
   "description": "Azure Local Draftsman — Interactive 2.5D visual architecture editor and pre-flight compliance auditor for Azure Local and Hyper-V network infrastructure",
   "keywords": ["azure-local-draftsman", "draftsman", "azure-local", "hyper-v", "network-visualization", "isometric", "canvas", "react"],
-  "homepage": "https://azurelocal.cloud/azurelocal-draftsman/",
+  "homepage": "https://azurelocal.github.io/azurelocal-draftsman/",
   "bugs": { "url": "https://github.com/AzureLocal/azurelocal-draftsman/issues" },
   "repository": { "type": "git", "url": "https://github.com/AzureLocal/azurelocal-draftsman" },
   "author": "Cristian Edwards Sabathe",
