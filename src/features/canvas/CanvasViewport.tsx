@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { MIN_ZOOM, MAX_ZOOM, ZOOM_SENSITIVITY, MAX_DPR, ARROW_NUDGE_FINE, ARROW_NUDGE_COARSE, SNAP_THRESHOLD } from '@/lib/config';
 import CanvasOverlay from '@/features/canvas/CanvasOverlay';
 import ContextMenu from '@/features/canvas/ContextMenu';
+import ViewModeToolbar from '@/features/canvas/ViewModeToolbar';
+import CompliancePanel from '@/features/validation/CompliancePanel';
 import { getClosestAnchorScreen } from '@/lib/geometry/anchors';
 import { hitTestNode, hitTestNodeScreen, hitTestConnectorScreen } from '@/lib/geometry/bounds';
 import { screenToWorld, type ViewportSize } from '@/lib/geometry/iso';
@@ -612,8 +614,8 @@ export default function CanvasViewport({ canvasRef, onCursorWorldChange, onViewp
               y: event.clientY - (stageRect?.top ?? 0),
             });
           }
-        }}
-      />
+      <ViewModeToolbar />
+      <CompliancePanel />
       <CanvasOverlay
         document={document}
         selection={selection}

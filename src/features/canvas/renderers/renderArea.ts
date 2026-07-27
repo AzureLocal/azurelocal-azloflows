@@ -141,10 +141,31 @@ export function renderArea(
   // Position label offset from icon (direction depends on corner) or at anchor if no icon
   const iconOffsetPx = hasIcon ? Math.min(area.width, area.height) * 0.14 * camera.zoom * 0.7 : 0;
   const labelScreen = worldToScreen(anchorWorld, camera, viewport);
-  const label = {
+  const textPos = {
     x: labelScreen.x + textStackDirection.x * iconOffsetPx * stackSign,
     y: labelScreen.y + textStackDirection.y * iconOffsetPx * stackSign,
   };
 
-  drawTransformedText(ctx, area.label, label, textDirection, textStackDirection, '#ffffff', `700 ${clampedFontSize}px Rajdhani, sans-serif`);
+  // Label rendering
+  let labelText = area.label;
+  if (area.vlanId) {
+    labelText = `[VLAN ${area.vlanId}] ${labelText}`;
+  }
+  if (area.cidr) {
+    labelText = `${labelText} (${area.cidr})`;
+  }
+  if (area.mtu) {
+    labelText = `${labelText} [MTU ${area.mtu}]`;
+  }
+
+  drawTransformedText(
+    ctx,
+    labelText,
+    textPos,
+    textDirection,
+    textStackDirection,
+    light ? darkenHex(area.glowColor, 0.45) : hexToRgba('#ffffff', 0.95),
+    true,
+    clampedFontSize,
+  );
 }

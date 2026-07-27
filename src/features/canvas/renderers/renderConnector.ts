@@ -5,7 +5,8 @@ import { findPathCrossings, insertHopsIntoPath, type Crossing } from '@/lib/geom
 import { drawArrowHead, drawPolyline, roundRectPath } from '@/lib/rendering/canvasPrimitives';
 import { hexToRgba, darkenHex } from '@/lib/rendering/tokens';
 import { isoQuad } from '@/lib/geometry/iso';
-import type { AreaEntity, CameraState, ConnectorEntity, NodeEntity, Point } from '@/types/document';
+import { getCableSpec } from '@/types/cabling';
+import { getPortScreenPoint } from '@/lib/geometry/portAnchors';
 
 export function renderConnector(
   ctx: CanvasRenderingContext2D,
@@ -22,8 +23,19 @@ export function renderConnector(
   otherPaths: Point[][] = [],
 ): void {
   const light = theme === 'light';
+  const cableSpec = getCableSpec(connector.cableType);
+  const baseColor = connector.cableType ? cableSpec.color : connector.color;
+  const color = light ? darkenHex(baseColor, 0.55) : baseColor;
+
   const smoothPath = buildConnectorSmoothPath(connector, source, target, camera, viewport);
-  const color = light ? darkenHex(connector.color, 0.55) : connector.color;
+
+  // Override start and end points with port anchors if port IDs specified
+  if (connector.sourcePortId) {
+    smoothPath[0] = getPortScreenPoint(source, connector.sourcePortId, camera, viewport);
+  }
+  if (connector.targetPortId) {
+    smoothPath[smoothPath.length - 1] = getPortScreenPoint(target, connector.targetPortId, camera, viewport);
+  }
 
   // Compute crossings with lower-z connectors and integrate hops into the path
   const crossings: Crossing[] = [];
@@ -64,28 +76,23 @@ export function renderConnector(
     }
   }
 
-  // Outer glow (dark mode only — skipped in light mode for a clean look)
-  if (!light) {
+  // Outer glow
+  if (!light && cableSpec.glow) {
     drawPolyline(ctx, displayPath);
-    ctx.strokeStyle = hexToRgba(color, 0.04);
-    ctx.lineWidth = 14;
+    ctx.strokeStyle = hexToRgba(color, 0.08);
+    ctx.lineWidth = cableSpec.lineWeight * 4;
     ctx.stroke();
   }
 
   drawPolyline(ctx, displayPath);
-  if (connector.style === 'dashed') {
-    ctx.setLineDash([10, 8]);
+  if (connector.style === 'dashed' || cableSpec.dashArray) {
+    ctx.setLineDash(cableSpec.dashArray || [10, 8]);
     ctx.lineDashOffset = -(time * 0.02);
   }
-  ctx.strokeStyle = hexToRgba(color, selected ? 0.95 : (light ? 0.72 : 0.35));
-  ctx.lineWidth = selected ? 3.5 : (light ? 3 : 2.5);
+  ctx.strokeStyle = hexToRgba(color, selected ? 1.0 : (light ? 0.85 : 0.65));
+  ctx.lineWidth = selected ? cableSpec.lineWeight * 1.5 : cableSpec.lineWeight;
   ctx.stroke();
   ctx.setLineDash([]);
-
-  drawPolyline(ctx, displayPath);
-  ctx.strokeStyle = hexToRgba(color, selected ? 1.0 : (light ? 0.98 : 0.82));
-  ctx.lineWidth = selected ? 2 : (light ? 1.6 : 1.2);
-  ctx.stroke();
 
 
 

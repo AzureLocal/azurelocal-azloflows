@@ -1,4 +1,4 @@
-﻿import { create } from 'zustand';
+import { create } from 'zustand';
 import { MIN_ZOOM, MAX_ZOOM } from '@/lib/config';
 import { hitTestArea, hitTestConnector, hitTestNode, hitTestPipe, hitTestText } from '@/lib/geometry/bounds';
 import { snapToGrid } from '@/lib/geometry/grid';
@@ -55,10 +55,12 @@ interface EditorStore {
   history: HistoryState;
   activeScenario: ScenarioId | null;
   theme: 'dark' | 'light';
+  viewMode: ViewMode;
   activeFlowSources: Set<FlowSource>;
   activeFlowTypes: Set<FlowType>;
   clipboard: ClipboardPayload | null;
   toggleTheme: () => void;
+  setViewMode: (mode: ViewMode) => void;
   setActiveScenario: (id: ScenarioId | null) => void;
   toggleFlowSource: (source: FlowSource) => void;
   toggleFlowType: (type: FlowType) => void;
@@ -220,12 +222,14 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
   preferredColor: palette.cyan,
   tool: 'select',
   toasts: [],
-  history: { past: [], future: [] },
+  history: createHistoryState(),
   activeScenario: null,
-  theme: 'dark',
-  activeFlowSources: new Set<FlowSource>(),
-  activeFlowTypes: new Set<FlowType>(),
+  theme: (localStorage.getItem('azloflows_theme') as 'dark' | 'light') || 'dark',
+  viewMode: 'hybrid',
+  activeFlowSources: new Set(FLOW_SOURCES.map((f) => f.id)),
+  activeFlowTypes: new Set(FLOW_TYPES.map((f) => f.id)),
   clipboard: null,
+  setViewMode: (mode) => set({ viewMode: mode }),
   toggleTheme: () => set((state) => ({ theme: state.theme === 'dark' ? 'light' : 'dark' })),
   setActiveScenario: (id) => set({ activeScenario: id, activeFlowSources: new Set<FlowSource>(), activeFlowTypes: new Set<FlowType>() }),
   toggleFlowSource: (source) => set((state) => {

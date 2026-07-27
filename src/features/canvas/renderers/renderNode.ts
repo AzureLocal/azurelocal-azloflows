@@ -14,6 +14,10 @@ import { renderAnalyticsPanel } from './renderAnalyticsPanel';
 import { renderStorage } from './renderStorage';
 import { renderBrowser2 } from './renderBrowser2';
 import { renderStandingNode } from './renderStandingNode';
+import { renderVendorSwitch } from './renderVendorSwitch';
+import { renderOobSwitch } from './renderOobSwitch';
+import { renderOpengearConsole } from './renderOpengearConsole';
+import { renderServerNode } from './renderServerNode';
 import type { CameraState, NodeEntity } from '@/types/document';
 
 export function renderNode(
@@ -27,6 +31,14 @@ export function renderNode(
 ): void {
   // Dispatch to shape-specific renderer
   switch (node.shape) {
+    case 'vendorSwitch':
+      return renderVendorSwitch(ctx, node, selected, camera, viewport, time, theme);
+    case 'oobSwitch':
+      return renderOobSwitch(ctx, node, selected, camera, viewport, time, theme);
+    case 'opengearConsole':
+      return renderOpengearConsole(ctx, node, selected, camera, viewport, time, theme);
+    case 'serverNode':
+      return renderServerNode(ctx, node, selected, camera, viewport, time, theme);
     case 'serverRack':
       return renderServerRack(ctx, node, selected, camera, viewport, time, theme);
     case 'card':
@@ -42,6 +54,7 @@ export function renderNode(
     case 'dashboard':
       return renderDashboard(ctx, node, selected, camera, viewport, time, theme);
     case 'storage':
+    case 'storageEnclosure':
       return renderStorage(ctx, node, selected, camera, viewport, time, theme);
     case 'chartPanel':
       return renderChartPanel(ctx, node, selected, camera, viewport, time, theme);

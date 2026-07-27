@@ -221,18 +221,29 @@ const analyticsPanelIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0
   <line x1="56" y1="12" x2="28" y2="23" stroke="rgba(77,141,255,0.4)" stroke-width="0.8"/>
   <circle cx="53" cy="9" r="1.3" fill="rgba(255,95,87,0.6)"/>
   <circle cx="50" cy="10" r="1.3" fill="rgba(255,189,46,0.6)"/>
-  <circle cx="47" cy="11.5" r="1.3" fill="rgba(40,200,64,0.6)"/>
-  <polyline points="52,40 47,34 42,37 37,28 32,32 29,26" fill="none" stroke="rgba(77,141,255,0.7)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
   <circle cx="42" cy="37" r="1.2" fill="rgba(77,141,255,0.5)"/>
   <circle cx="32" cy="32" r="1.2" fill="rgba(77,141,255,0.5)"/>
   <circle cx="29" cy="26" r="1.2" fill="rgba(77,141,255,0.5)"/>
   <line x1="56" y1="6" x2="56" y2="44" stroke="rgba(77,141,255,0.9)" stroke-width="1.5"/>
-  </g>
 </svg>`;
+
+export interface PaletteShape {
+  id: 'area' | 'node' | 'standingNode' | 'text' | 'pipe' | 'serverRack' | 'card' | 'platform' | 'browser' | 'browser2' | 'dashboard' | 'storage' | 'chartPanel' | 'analyticsPanel' | 'vendorSwitch' | 'oobSwitch' | 'opengearConsole' | 'serverNode' | 'storageEnclosure';
+  title: string;
+  /** Inline SVG markup (64×64 viewBox) showing an isometric preview */
+  icon: string;
+  /** For node-variant shapes, specifies the NodeShape to create */
+  nodeShape?: NodeShape;
+}
 
 export const paletteShapes: PaletteShape[] = [
   { id: 'area', title: 'Flat Area', icon: areaIcon },
   { id: 'node', title: 'Lay-flat Node',      icon: nodeIcon },
+  { id: 'vendorSwitch', title: 'ToR Switch', icon: serverRackIcon, nodeShape: 'vendorSwitch' },
+  { id: 'oobSwitch', title: '1G OOB Switch', icon: serverRackIcon, nodeShape: 'oobSwitch' },
+  { id: 'opengearConsole', title: 'Opengear Console', icon: serverRackIcon, nodeShape: 'opengearConsole' },
+  { id: 'serverNode', title: 'HCI / Server Node', icon: serverRackIcon, nodeShape: 'serverNode' },
+  { id: 'storageEnclosure', title: 'Storage Enclosure', icon: storageIcon, nodeShape: 'storageEnclosure' },
   { id: 'standingNode', title: 'Standing Node', icon: standingNodeIcon, nodeShape: 'standingNode' },
   { id: 'serverRack', title: 'Server Rack', icon: serverRackIcon, nodeShape: 'serverRack' },
   { id: 'card',     title: 'Card',     icon: cardIcon,     nodeShape: 'card' },

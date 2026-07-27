@@ -10,7 +10,12 @@ export type NodeShape =
   | 'storage'
   | 'chartPanel'
   | 'analyticsPanel'
-  | 'standingNode';
+  | 'standingNode'
+  | 'vendorSwitch'
+  | 'oobSwitch'
+  | 'opengearConsole'
+  | 'serverNode'
+  | 'storageEnclosure';
 export type ConnectorStyle = 'solid' | 'dashed' | 'animated';
 export type ToolMode = 'select' | 'pan';
 export type AnchorSide = 'top' | 'right' | 'bottom' | 'left';
@@ -115,9 +120,14 @@ export interface AreaEntity {
   icon?: string;
   labelAnchor?: LabelAnchorCorner;
   zIndex: number;
+  vlanId?: number;
+  cidr?: string;
+  mtu?: number;
   tags?: string[];
   notes?: string;
 }
+
+import type { CableMediaType } from './cabling';
 
 export interface NodeEntity {
   id: string;
@@ -138,9 +148,12 @@ export interface NodeEntity {
     yRatio: number;
   };
   textRotated?: boolean;
-    textPosition?: 'center' | 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right';
-    fontSize?: number;
+  textPosition?: 'center' | 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right';
+  fontSize?: number;
   zIndex: number;
+  hardwareProfileId?: string;
+  hardwareRole?: string;
+  setTeams?: { id: string; name: string; portIds: string[] }[];
   tags?: string[];
   notes?: string;
 }
@@ -152,6 +165,10 @@ export interface ConnectorEntity {
   targetId: string;
   sourceAnchor: AnchorId;
   targetAnchor: AnchorId;
+  sourcePortId?: string;
+  targetPortId?: string;
+  cableType?: CableMediaType;
+  cableTagLabel?: string;
   color: string;
   label: string;
   style: ConnectorStyle;

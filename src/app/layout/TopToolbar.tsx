@@ -4,6 +4,8 @@ import Button from '@/components/ui/Button';
 import GlassPanel from '@/components/ui/GlassPanel';
 import ExportPreviewDialog from '@/features/export/ExportPreviewDialog';
 import { exportDocumentAsJson, exportDocumentAsJsonSaveAs, exportDocumentAsSvg, exportDocumentAsSvgSaveAs, exportDocumentAsPdf, exportDocumentAsHtml, importDocumentFromFile } from '@/features/export/fileActions';
+import { exportCableScheduleCsv } from '@/features/export/exportCableScheduleCsv';
+import { exportSwitchPortMap } from '@/features/export/exportSwitchPortMap';
 import KeyboardShortcutsDialog from '@/features/canvas/KeyboardShortcutsDialog';
 import SearchDialog from '@/features/canvas/SearchDialog';
 import TemplateGalleryDialog from '@/features/templates/TemplateGalleryDialog';
@@ -170,6 +172,9 @@ export default function TopToolbar({ canvasRef, viewport }: TopToolbarProps) {
     { label: 'PNG image…', onClick: () => { if (canvasRef.current) { setCanvasEl(canvasRef.current); setPngPreview(true); } } },
     { label: 'SVG vector', onClick: () => exportDocumentAsSvg(document, camera, viewport, tagFilter, theme) },
     { label: 'SVG vector As…', onClick: () => exportDocumentAsSvgSaveAs(document, camera, viewport, tagFilter, theme) },
+    { separator: true as const },
+    { label: 'Export Cabling Schedule (CSV)', onClick: () => exportCableScheduleCsv(document) },
+    { label: 'Export Switch Port Map (TXT)', onClick: () => exportSwitchPortMap(document) },
     { separator: true as const },
     { label: 'PDF document', onClick: () => exportDocumentAsPdf(canvasRef.current, `${document.name.toLowerCase().replace(/\s+/g, '-')}.pdf`) },
     { label: 'Interactive HTML', onClick: () => exportDocumentAsHtml(document, camera, viewport, tagFilter, theme) },

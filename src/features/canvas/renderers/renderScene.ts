@@ -5,9 +5,12 @@ import { renderBackground } from '@/features/canvas/renderers/renderBackground';
 import { renderConnector, buildConnectorSmoothPath } from '@/features/canvas/renderers/renderConnector';
 import { renderIsoGrid } from '@/features/canvas/renderers/renderIsoGrid';
 import { renderNode } from '@/features/canvas/renderers/renderNode';
+import { renderSetTeamOverlay } from '@/features/canvas/renderers/renderSetTeamOverlay';
 import { renderPipe } from '@/features/canvas/renderers/renderPipe';
 import { renderSelectionOutline } from '@/features/canvas/renderers/renderSelection';
 import { renderText } from '@/features/canvas/renderers/renderText';
+import { auditDiagramDocument } from '@/features/validation/diagramAuditor';
+import { renderValidationBadges } from '@/features/canvas/renderers/renderValidationBadges';
 import { isoQuad, type ViewportSize } from '@/lib/geometry/iso';
 import type { DiagramDocument, SelectionState, CameraState, TagFilter, Point } from '@/types/document';
 
@@ -89,6 +92,7 @@ export function renderScene({ ctx, viewport, document, selection, camera, time, 
       }
       case 'node':
         renderNode(ctx, item.entity, selection.type === 'node' && selection.ids.includes(item.entity.id), camera, viewport, time, theme);
+        renderSetTeamOverlay(ctx, item.entity, camera, viewport, time);
         break;
       case 'pipe':
         renderPipe(ctx, item.entity, selection.type === 'pipe' && selection.ids.includes(item.entity.id), camera, viewport, { nodes: visibleNodes, areas: visibleAreas }, theme);
@@ -117,4 +121,8 @@ export function renderScene({ ctx, viewport, document, selection, camera, time, 
       renderSelectionOutline(ctx, pipe, camera, viewport);
     }
   }
+
+  // Pre-Flight Compliance Validation Badges
+  const issues = auditDiagramDocument(document);
+  renderValidationBadges(ctx, visibleNodes, issues, camera, viewport, time);
 }

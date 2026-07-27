@@ -5,6 +5,8 @@ import { colorSwatches, textColorSwatches } from '@/features/palette/paletteData
 import { companionFillForGlow } from '@/lib/rendering/tokens';
 import { getDocScenarios, getDocFlowSources, getDocFlowTypes, getDocFlowTypeExclusions, getDocSourceFlowTypeExclusions, getDocFlowSourceRules } from '@/types/document';
 import type { AreaEntity, NodeShape, PickerDef } from '@/types/document';
+import { CABLE_MEDIA_CATALOG } from '@/types/cabling';
+import { DEFAULT_HCI_VLANS } from '@/types/logicalNetwork';
 import { getConnectorStyleOptions, getSelectedEntity, useEditorStore } from '@/state/useEditorStore';
 import FlowTypeVisibilityDialog from './FlowTypeVisibilityDialog';
 
@@ -214,6 +216,53 @@ export default function InspectorPanel() {
               </select>
             </label>
             <label className="field">
+              <span>Logical VLAN Profile</span>
+              <select
+                value={selectedArea.vlanId ?? ''}
+                onChange={(e) => {
+                  const id = Number(e.target.value);
+                  const spec = DEFAULT_HCI_VLANS[id];
+                  if (spec) {
+                    updateArea(selectedArea.id, {
+                      vlanId: spec.vlanId,
+                      label: spec.name,
+                      cidr: spec.cidr,
+                      mtu: spec.mtu,
+                      glowColor: spec.colorHex,
+                      borderColor: spec.colorHex,
+                    });
+                  } else {
+                    updateArea(selectedArea.id, { vlanId: undefined });
+                  }
+                }}
+              >
+                <option value="">None (Generic Area)</option>
+                {Object.values(DEFAULT_HCI_VLANS).map((v) => (
+                  <option key={v.vlanId} value={v.vlanId}>VLAN {v.vlanId} - {v.name.split('(')[1]?.replace(')', '') || v.name}</option>
+                ))}
+              </select>
+            </label>
+            <div className="field-row">
+              <label className="field">
+                <span>Subnet CIDR</span>
+                <input
+                  value={selectedArea.cidr ?? ''}
+                  onChange={(e) => updateArea(selectedArea.id, { cidr: e.target.value || undefined })}
+                  placeholder="e.g. 192.168.11.0/24"
+                />
+              </label>
+              <label className="field">
+                <span>MTU</span>
+                <select
+                  value={selectedArea.mtu ?? 1500}
+                  onChange={(e) => updateArea(selectedArea.id, { mtu: Number(e.target.value) })}
+                >
+                  <option value={1500}>1500 (Standard)</option>
+                  <option value={9000}>9000 (Jumbo Frames)</option>
+                </select>
+              </label>
+            </div>
+            <label className="field">
               <span>Glow</span>
               <div className="swatch-row">
                 {colorSwatches.map((color) => (
@@ -358,6 +407,39 @@ export default function InspectorPanel() {
               </div>
             </label>
             <label className="field">
+              <span>SET Teams (Hyper-V / Azure Local)</span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                {(selectedNode.setTeams ?? []).map((team, idx) => (
+                  <div key={team.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '11px', background: 'rgba(0, 210, 255, 0.1)', padding: '3px 6px', borderRadius: '4px' }}>
+                    <span style={{ color: '#00d2ff', fontWeight: 600 }}>{team.name}</span>
+                    <button
+                      className="ui-button"
+                      style={{ padding: '1px 4px', fontSize: '10px' }}
+                      onClick={() => {
+                        const next = (selectedNode.setTeams ?? []).filter((_, i) => i !== idx);
+                        updateNode(selectedNode.id, { setTeams: next });
+                      }}
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))}
+                <button
+                  className="ui-button"
+                  style={{ fontSize: '11px', marginTop: '2px' }}
+                  onClick={() => {
+                    const next = [
+                      ...(selectedNode.setTeams ?? []),
+                      { id: `set-${Date.now()}`, name: `SET-Team-0${(selectedNode.setTeams?.length ?? 0) + 1}`, portIds: ['OCP-P1', 'OCP-P2'] }
+                    ];
+                    updateNode(selectedNode.id, { setTeams: next });
+                  }}
+                >
+                  + Add SET Team Boundary
+                </button>
+              </div>
+            </label>
+            <label className="field">
               <span>Notes</span>
               <textarea rows={3} value={selectedNode.notes ?? ''} onChange={(e) => updateNode(selectedNode.id, { notes: e.target.value })} placeholder="Add notes…" />
             </label>
@@ -373,6 +455,22 @@ export default function InspectorPanel() {
             <label className="field">
               <span>Label</span>
               <input value={selectedConnector.label} onChange={(event) => updateConnector(selectedConnector.id, { label: event.target.value })} />
+            </label>
+            <label className="field">
+              <span>Cable Media Type</span>
+              <select value={selectedConnector.cableType ?? 'dac'} onChange={(event) => updateConnector(selectedConnector.id, { cableType: event.target.value as any })}>
+                {Object.values(CABLE_MEDIA_CATALOG).map((c) => (
+                  <option key={c.id} value={c.id}>{c.name} ({c.speedLabel})</option>
+                ))}
+              </select>
+            </label>
+            <label className="field">
+              <span>Source Port ID</span>
+              <input value={selectedConnector.sourcePortId ?? ''} onChange={(event) => updateConnector(selectedConnector.id, { sourcePortId: event.target.value || undefined })} placeholder="e.g. P17, iDRAC, OCP-P1" />
+            </label>
+            <label className="field">
+              <span>Target Port ID</span>
+              <input value={selectedConnector.targetPortId ?? ''} onChange={(event) => updateConnector(selectedConnector.id, { targetPortId: event.target.value || undefined })} placeholder="e.g. P17, Mgmt1" />
             </label>
             <label className="field">
               <span>Style</span>
