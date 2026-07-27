@@ -47,7 +47,6 @@ export function renderArea(
 
   // Flat fill
   if (light) {
-    // Paint opaque white base so colours aren't washed out by the grey canvas
     drawPolygon(ctx, points);
     ctx.fillStyle = 'rgba(255,255,255,0.82)';
     ctx.fill();
@@ -58,10 +57,7 @@ export function renderArea(
   gradient.addColorStop(0.5, hexToRgba(area.fill, light ? 0.60 : 0.34));
   gradient.addColorStop(1, hexToRgba(area.fill, light ? 0.42 : 0.2));
   ctx.fillStyle = gradient;
-  
-  
   ctx.fill();
-  
 
   // Border
   drawPolygon(ctx, points);
@@ -100,13 +96,12 @@ export function renderArea(
   }
   ctx.restore();
 
-  // Icon + label positioned at the chosen corner of the isometric diamond
+  // Icon + label positioned at chosen corner
   const hasIcon = area.icon && nodeIconCatalog[area.icon];
   const { xR, yR, stackSign } = anchorLayout(area.labelAnchor ?? 'bottom-left');
   const anchorWorld = { x: area.x + area.width * xR, y: area.y + area.height * yR };
   const areaFontSize = area.fontSize ?? DEFAULT_FONT_SIZE;
 
-  // Clamp font size so text never overflows the container's screen-space bounds.
   const availableWidth = Math.hypot(bottomRight.x - bottomLeft.x, bottomRight.y - bottomLeft.y) * 0.85;
   const testFont = `700 ${areaFontSize}px Rajdhani, sans-serif`;
   ctx.font = testFont;
@@ -115,7 +110,6 @@ export function renderArea(
     ? Math.floor(areaFontSize * (availableWidth / textWidth))
     : areaFontSize;
 
-  // Draw area icon
   if (hasIcon) {
     const iconDef = nodeIconCatalog[area.icon!];
     const iconSize = Math.min(area.width, area.height) * AREA_ICON_SCALE * camera.zoom;
@@ -138,7 +132,6 @@ export function renderArea(
     ctx.restore();
   }
 
-  // Position label offset from icon (direction depends on corner) or at anchor if no icon
   const iconOffsetPx = hasIcon ? Math.min(area.width, area.height) * 0.14 * camera.zoom * 0.7 : 0;
   const labelScreen = worldToScreen(anchorWorld, camera, viewport);
   const textPos = {
@@ -146,7 +139,6 @@ export function renderArea(
     y: labelScreen.y + textStackDirection.y * iconOffsetPx * stackSign,
   };
 
-  // Label rendering
   let labelText = area.label;
   if (area.vlanId) {
     labelText = `[VLAN ${area.vlanId}] ${labelText}`;
@@ -165,7 +157,6 @@ export function renderArea(
     textDirection,
     textStackDirection,
     light ? darkenHex(area.glowColor, 0.45) : hexToRgba('#ffffff', 0.95),
-    true,
-    clampedFontSize,
+    `700 ${clampedFontSize}px Rajdhani, sans-serif`,
   );
 }

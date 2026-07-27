@@ -6,8 +6,7 @@ import { projectIso } from '@/lib/geometry/iso';
 import { resizeRectFromHandle, type ResizeHandle } from '@/lib/geometry/resize';
 import { containsArea, containsNode, containsPipe, containsText, type SelectionBounds } from '@/lib/geometry/selection';
 import { buildConnectorPath } from '@/lib/geometry/routing';
-import { companionPalette, hexToRgba, palette } from '@/lib/rendering/tokens';
-import { cloneDocument, createHistoryState, withCommittedHistory, type HistoryState } from '@/state/history';
+import { cloneDocument, withCommittedHistory, type HistoryState } from '@/state/history';
 import type {
   AreaEntity,
   CameraState,
@@ -223,7 +222,7 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
   preferredColor: palette.cyan,
   tool: 'select',
   toasts: [],
-  history: createHistoryState(),
+  history: { past: [], future: [] },
   activeScenario: null,
   theme: (localStorage.getItem('azloflows_theme') as 'dark' | 'light') || 'dark',
   viewMode: 'hybrid',

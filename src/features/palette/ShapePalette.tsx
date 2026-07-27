@@ -54,18 +54,12 @@ export default function ShapePalette() {
                 onClick={() => {
                   let startY = 100;
                   stack.nodes.forEach((n, i) => {
-                    addNode({
+                    addShape('node', { x: 200, y: startY + i * 90 }, {
                       shape: n.shape || 'vendorSwitch',
-                      x: 200,
-                      y: startY + i * 90,
-                      width: n.width || 320,
-                      height: n.height || 80,
                       title: n.title || 'Hardware Node',
                       subtitle: n.subtitle || '',
                       fill: n.fill || '#1e2530',
                       glowColor: n.glowColor || '#007db8',
-                      hardwareProfileId: n.hardwareProfileId,
-                      tags: n.tags,
                     });
                   });
                 }}
