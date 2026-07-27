@@ -169,6 +169,7 @@ export interface ConnectorEntity {
   targetPortId?: string;
   cableType?: CableMediaType;
   cableTagLabel?: string;
+  vlanId?: number;
   color: string;
   label: string;
   style: ConnectorStyle;

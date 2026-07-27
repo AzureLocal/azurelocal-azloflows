@@ -12,7 +12,7 @@ export default function ShapePalette() {
   const [activeTab, setActiveTab] = useState<ActiveTab>('all');
   const preferredColor = useEditorStore((state) => state.preferredColor);
   const setPreferredColor = useEditorStore((state) => state.setPreferredColor);
-  const addNode = useEditorStore((state) => state.addNode);
+  const addShape = useEditorStore((state) => state.addShape);
 
   const filteredHardware = HARDWARE_PROFILES.filter(
     (p) => activeTab === 'all' || p.vendor === activeTab

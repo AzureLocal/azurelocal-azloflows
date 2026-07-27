@@ -137,8 +137,7 @@ export function renderServerNode(
     topFaceBasisX,
     topFaceBasisY,
     light ? '#0f172a' : '#f8fafc',
-    node.textRotated ?? true,
-    fontSz,
+    `700 ${fontSz}px Inter, system-ui, sans-serif`,
   );
 
   if (subtitleText && camera.zoom > 0.5) {
@@ -147,7 +146,6 @@ export function renderServerNode(
       y: textPos.y + topFaceBasisY.y * (fontSz * 1.3),
     };
     const subFontSz = fontSz * 0.82;
-    ctx.font = `400 ${subFontSz}px Inter, system-ui, sans-serif`;
     drawTransformedText(
       ctx,
       subtitleText,
@@ -155,8 +153,7 @@ export function renderServerNode(
       topFaceBasisX,
       topFaceBasisY,
       light ? '#475569' : hexToRgba('#94a3b8', 0.85),
-      node.textRotated ?? true,
-      subFontSz,
+      `400 ${subFontSz}px Inter, system-ui, sans-serif`,
     );
   }
   ctx.restore();

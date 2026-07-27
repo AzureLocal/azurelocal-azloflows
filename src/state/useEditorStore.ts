@@ -7,7 +7,7 @@ import { resizeRectFromHandle, type ResizeHandle } from '@/lib/geometry/resize';
 import { containsArea, containsNode, containsPipe, containsText, type SelectionBounds } from '@/lib/geometry/selection';
 import { buildConnectorPath } from '@/lib/geometry/routing';
 import { companionPalette, hexToRgba, palette } from '@/lib/rendering/tokens';
-import { cloneDocument, withCommittedHistory, type HistoryState } from '@/state/history';
+import { cloneDocument, createHistoryState, withCommittedHistory, type HistoryState } from '@/state/history';
 import type {
   AreaEntity,
   CameraState,
@@ -30,9 +30,10 @@ import type {
   ToastMessage,
   ToolMode,
 } from '@/types/document';
-import { DOCUMENT_VERSION } from '@/types/document';
+import { DOCUMENT_VERSION, FLOW_SOURCES, FLOW_TYPES } from '@/types/document';
 import { getDocScenarios, getDocFlowSourceRules } from '@/types/document';
 import { loadDocument, normalizeDocument } from '@/lib/serialization/storage';
+import type { ViewMode } from '@/types/logicalNetwork';
 
 type ClipboardPayload =
   | { type: 'area'; entities: AreaEntity[] }

@@ -5,6 +5,7 @@ import { findPathCrossings, insertHopsIntoPath, type Crossing } from '@/lib/geom
 import { drawArrowHead, drawPolyline, roundRectPath } from '@/lib/rendering/canvasPrimitives';
 import { hexToRgba, darkenHex } from '@/lib/rendering/tokens';
 import { isoQuad } from '@/lib/geometry/iso';
+import type { AreaEntity, CameraState, ConnectorEntity, NodeEntity, Point } from '@/types/document';
 import { getCableSpec } from '@/types/cabling';
 import { getPortScreenPoint } from '@/lib/geometry/portAnchors';
 

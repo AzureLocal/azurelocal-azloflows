@@ -228,7 +228,7 @@ const analyticsPanelIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0
 </svg>`;
 
 export interface PaletteShape {
-  id: 'area' | 'node' | 'standingNode' | 'text' | 'pipe' | 'serverRack' | 'card' | 'platform' | 'browser' | 'browser2' | 'dashboard' | 'storage' | 'chartPanel' | 'analyticsPanel' | 'vendorSwitch' | 'oobSwitch' | 'opengearConsole' | 'serverNode' | 'storageEnclosure';
+  id: NodeShape | 'area' | 'text' | 'pipe';
   title: string;
   /** Inline SVG markup (64×64 viewBox) showing an isometric preview */
   icon: string;

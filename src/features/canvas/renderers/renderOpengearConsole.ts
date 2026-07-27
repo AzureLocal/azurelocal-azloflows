@@ -118,8 +118,7 @@ export function renderOpengearConsole(
     topFaceBasisX,
     topFaceBasisY,
     light ? '#0f172a' : '#f8fafc',
-    node.textRotated ?? true,
-    fontSz,
+    `700 ${fontSz}px Inter, system-ui, sans-serif`,
   );
   ctx.restore();
 }
