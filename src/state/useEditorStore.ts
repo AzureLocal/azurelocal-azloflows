@@ -260,6 +260,7 @@ export const useEditorStore = create<EditorStore>((set: any, get: any) => ({
     newDoc.name = `Azure Local ${config.nodeCount}-Node ${config.serverModel} Architecture`;
     
     // 1. Create OOB Switch / Console
+    const oobProfileId = config.oobConsole.includes('CM8148') ? 'opengear-cm8148' : config.oobConsole.includes('N3248TE') ? 'dell-n3248te-on' : config.oobConsole.includes('S3148P') ? 'dell-s3148p' : 'opengear-om2248';
     const oobId = 'node-oob-1';
     newDoc.nodes.push({
       id: oobId,
@@ -273,12 +274,13 @@ export const useEditorStore = create<EditorStore>((set: any, get: any) => ({
       height: 90,
       fill: '#0f172a',
       glowColor: '#00e5ff',
-      hardwareProfileId: config.oobConsole.includes('Opengear') ? 'opengear-om2248' : 'dell-s3148p',
+      hardwareProfileId: oobProfileId,
       notes: 'Out-of-band management console server',
       zIndex: 10,
     });
 
     // 2. Create ToR Switch A & B
+    const torProfileId = config.switchModel.includes('Cisco') ? 'cisco-n9k-93180yc-fx3' : config.switchModel.includes('S5248F') ? 'dell-s5248f-on' : config.switchModel.includes('S5224F') ? 'dell-s5224f-on' : config.switchModel.includes('SN2100') ? 'nvidia-sn2100' : 'arista-7050sx3-48yc8';
     const switchAId = 'node-tor-a';
     const switchBId = 'node-tor-b';
     newDoc.nodes.push({
@@ -293,7 +295,7 @@ export const useEditorStore = create<EditorStore>((set: any, get: any) => ({
       height: 95,
       fill: '#1e293b',
       glowColor: '#3b82f6',
-      hardwareProfileId: config.switchModel.includes('Arista') ? 'arista-7050sx3' : 'cisco-n9k-93180',
+      hardwareProfileId: torProfileId,
       zIndex: 10,
     });
     newDoc.nodes.push({
@@ -308,7 +310,7 @@ export const useEditorStore = create<EditorStore>((set: any, get: any) => ({
       height: 95,
       fill: '#1e293b',
       glowColor: '#3b82f6',
-      hardwareProfileId: config.switchModel.includes('Arista') ? 'arista-7050sx3' : 'cisco-n9k-93180',
+      hardwareProfileId: torProfileId,
       zIndex: 10,
     });
 

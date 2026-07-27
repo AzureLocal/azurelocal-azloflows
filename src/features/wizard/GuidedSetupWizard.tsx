@@ -218,8 +218,11 @@ export default function GuidedSetupWizard() {
                   <div style={{ fontSize: '13px', fontWeight: 600, color: '#e2e8f0', marginBottom: '8px' }}>Top-of-Rack (ToR) Switch Pair:</div>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                     {[
-                      { name: 'Arista 7050SX3', desc: '48x 25GbE SFP28 + 6x 100GbE QSFP28, ultra-low latency MLAG pair' },
-                      { name: 'Cisco Nexus 93180YC-FX3', desc: '48x 25GbE SFP28 + 6x 100GbE, vPC dual-ToR HA pair' },
+                      { name: 'Arista 7050SX3', desc: '48x 25GbE SFP28 + 8x 100GbE QSFP28, ultra-low latency MLAG pair' },
+                      { name: 'Cisco Nexus 93180YC', desc: '48x 25GbE SFP28 + 6x 100GbE, vPC dual-ToR HA pair' },
+                      { name: 'Dell PowerSwitch S5248F-ON', desc: '48x 25GbE SFP28 + 4x 100GbE QSFP28 + 2x QSFPDD ToR HCI switch' },
+                      { name: 'Dell PowerSwitch S5224F-ON', desc: '24x 25GbE SFP28 + 4x 100GbE QSFP28 small-scale ToR switch' },
+                      { name: 'Nvidia Spectrum SN2100', desc: '16x 100GbE QSFP28 ultra-low latency RoCEv2 fabric switch' },
                     ].map((sw) => (
                       <div
                         key={sw.name}
@@ -232,19 +235,21 @@ export default function GuidedSetupWizard() {
                           cursor: 'pointer',
                         }}
                       >
-                        <div style={{ fontWeight: 700, color: switchModel === sw.name ? '#00e5ff' : '#ffffff' }}>{sw.name}</div>
-                        <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '4px' }}>{sw.desc}</div>
+                        <div style={{ fontWeight: 700, color: switchModel === sw.name ? '#00e5ff' : '#ffffff', fontSize: '14px' }}>{sw.name}</div>
+                        <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '4px', lineHeight: 1.3 }}>{sw.desc}</div>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 <div>
-                  <div style={{ fontSize: '13px', fontWeight: 600, color: '#e2e8f0', marginBottom: '8px' }}>Out-of-Band (OOB) Management:</div>
+                  <div style={{ fontSize: '13px', fontWeight: 600, color: '#e2e8f0', marginBottom: '8px' }}>Out-of-Band (OOB) Management & Console:</div>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                     {[
                       { name: 'Opengear OM2248', desc: '48-Port Serial Console & Management Server with Smart OOB' },
-                      { name: '1G OOB Switch', desc: 'Dedicated 48-Port 1GbE RJ45 Management Ethernet Switch' },
+                      { name: 'Opengear CM8148', desc: '48-Port Enterprise Console Server with Dual AC Power' },
+                      { name: 'Dell PowerSwitch N3248TE-ON', desc: '48-Port 1GbE RJ45 + 4x 10GbE SFP+ OOB Management Switch' },
+                      { name: 'Dell PowerSwitch S3148P', desc: '48-Port 1GbE PoE+ Enterprise OOB Management Switch' },
                     ].map((oob) => (
                       <div
                         key={oob.name}
@@ -257,8 +262,8 @@ export default function GuidedSetupWizard() {
                           cursor: 'pointer',
                         }}
                       >
-                        <div style={{ fontWeight: 700, color: oobConsole === oob.name ? '#00e5ff' : '#ffffff' }}>{oob.name}</div>
-                        <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '4px' }}>{oob.desc}</div>
+                        <div style={{ fontWeight: 700, color: oobConsole === oob.name ? '#00e5ff' : '#ffffff', fontSize: '14px' }}>{oob.name}</div>
+                        <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '4px', lineHeight: 1.3 }}>{oob.desc}</div>
                       </div>
                     ))}
                   </div>
