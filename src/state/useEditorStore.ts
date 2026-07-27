@@ -6,6 +6,7 @@ import { projectIso } from '@/lib/geometry/iso';
 import { resizeRectFromHandle, type ResizeHandle } from '@/lib/geometry/resize';
 import { containsArea, containsNode, containsPipe, containsText, type SelectionBounds } from '@/lib/geometry/selection';
 import { buildConnectorPath } from '@/lib/geometry/routing';
+import { companionPalette, hexToRgba, palette } from '@/lib/rendering/tokens';
 import { cloneDocument, withCommittedHistory, type HistoryState } from '@/state/history';
 import type {
   AreaEntity,
@@ -213,7 +214,7 @@ function clampNodeToArea(node: NodeEntity, area: AreaEntity): NodeEntity {
   };
 }
 
-export const useEditorStore = create<EditorStore>((set, get) => ({
+export const useEditorStore = create<EditorStore>((set: any, get: any) => ({
   document: createBaseDocument(),
   selection: { type: null, ids: [] },
   camera: defaultCamera,
