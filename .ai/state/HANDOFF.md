@@ -3,24 +3,30 @@
 ## Last session
 
 - **What changed and why:**
-  - **Rewrote About Page (`overview` sub-tab)**:
-    - Removed duplicate Home page hero text, CTAs, and feature grid cards from the `About -> Overview & Features` tab.
-    - Implemented authentic project mission and architecture documentation:
-      - **Project Mission & Problem Solved**: Documents why AzLoFlows exists (eliminating manual cabling errors, switch misconfigurations, and VLAN isolation failures in Azure Local HCI & Hyper-V deployments).
-      - **Core System Architecture**: Breaks down the 2.5D Isometric Vector Engine, Automated Compliance Auditor, Multi-Layer View Isolation, and Datacenter Handoff Exporters.
-  - **About Left Navigation Sidebar Sub-Tabs**:
-    1. `ℹ️ Overview & Mission`
-    2. `📋 Release Notes`
-    3. `📜 Change Logs`
-    4. `🗺️ Product Roadmap`
-    5. `❤️ Credits & License`
-- **Files touched:**
-  - `src/features/landing/LandingPage.tsx`
-  - `.ai/state/HANDOFF.md`
+  - **Global Application Rebrand**: Renamed project from `AzLoFlows` to **`Azure Local Draftsman`** (`Draftsman`).
+    - **Display Name**: `Azure Local Draftsman`
+    - **Short Form**: `Draftsman`
+    - **Repo Name & URL**: `azurelocal-draftsman` (`https://github.com/AzureLocal/azurelocal-draftsman.git`)
+    - **npm Package Name**: `azurelocal-draftsman` in [`package.json`](file:///d:/git/azurelocal/azurelocal-azloflows/package.json)
+    - **Vite Base**: `/azurelocal-draftsman/` in [`vite.config.ts`](file:///d:/git/azurelocal/azurelocal-azloflows/vite.config.ts)
+  - **Backward Compatibility for LocalStorage**:
+    - [`src/lib/serialization/storage.ts`](file:///d:/git/azurelocal/azurelocal-azloflows/src/lib/serialization/storage.ts): Uses `draftsman.diagram.document` and `draftsman.recent` with automatic fallback reads from legacy keys (`isoflows.diagram.document`, `azloflows.diagram.document`, `isoflows.recent`, `azloflows.recent`).
+    - [`src/lib/serialization/snapshots.ts`](file:///d:/git/azurelocal/azurelocal-azloflows/src/lib/serialization/snapshots.ts): Uses `draftsman.snapshots` with automatic fallback reads from `isoflows.snapshots` and `azloflows.snapshots`.
+    - [`src/state/useEditorStore.ts`](file:///d:/git/azurelocal/azurelocal-azloflows/src/state/useEditorStore.ts): Reads `draftsman_theme` with fallback to `azloflows_theme` and `isoflows_theme`.
+  - **All Updated Entry Points & Docs**:
+    - `index.html` (title, meta description, og: and twitter: tags)
+    - `public/404.html`
+    - `README.md`, `CHANGELOG.md`, `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `SECURITY.md`
+    - `docs/README.md`, `docs/cabling-standards.md`, `docs/schedule-exporters.md`
+    - `pmo/VISION_AND_STRATEGY.md`, `pmo/README.md`, `pmo/PRODUCT_ROADMAP.md`, `pmo/COMPREHENSIVE_SITE_AUDIT.md`, `pmo/BACKLOG.md`, `pmo/ARCHITECTURE_AUDIT.md`
+    - `.github/workflows/deploy.yml`, `.github/workflows/validate.yml`
+    - `.ai/mcp/mcp-servers.md`, `.claude/agents/azurelocal-draftsman-engineer.md`, `.codex/config.toml`
+    - `src/main.tsx`, `src/components/ui/ErrorBoundary.tsx`, `src/app/layout/TopToolbar.tsx`, `src/features/landing/LandingHeader.tsx`, `src/features/export/fileActions.ts`, `scripts/record-demo.mjs`
+- **Files touched:** 33 files modified across repo.
 - **Commands run & results:**
-  - `npx tsc -p tsconfig.app.json --noEmit` (**Passed 0 errors**)
-  - `npx vite build` (**Built dist in 7.18s**)
-  - `git push origin main` (**Pushed commit eb68b89 to AzureLocal/azurelocal-azloflows**).
-- **Branch:** `main` — committed & pushed.
-- **GitHub Actions Status:** Green (`completed success`).
+  - `npm run build` (**Passed — 0 errors, built bundle in 2.22s**)
+  - `npm test -- --run` (**Passed — 18 unit tests passed in 963ms**)
+  - `npx eslint src/` (**Passed — 0 errors**)
+  - `git remote set-url origin https://github.com/AzureLocal/azurelocal-draftsman.git` (**Updated**)
+- **Branch:** `main` (commit `c4ee64b`).
 - **Blockers:** None.
