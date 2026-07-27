@@ -1,6 +1,6 @@
 import { useEditorStore } from '@/state/useEditorStore';
 
-export type LandingTab = 'about' | 'docs';
+export type LandingTab = 'home' | 'about' | 'docs';
 
 interface LandingHeaderProps {
   activeTab: LandingTab;
@@ -32,7 +32,7 @@ export default function LandingHeader({ activeTab, setActiveTab }: LandingHeader
       }}
     >
       {/* Brand Logo */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }} onClick={() => setActiveTab('about')}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }} onClick={() => setActiveTab('home')}>
         <div
           style={{
             width: '36px',
@@ -60,9 +60,10 @@ export default function LandingHeader({ activeTab, setActiveTab }: LandingHeader
         </div>
       </div>
 
-      {/* Main Nav Tabs - Clean & Uncluttered */}
+      {/* Main Nav Tabs: Home, About, How-To & Docs */}
       <nav style={{ display: 'flex', gap: '8px', background: isLight ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.03)', padding: '4px', borderRadius: '10px', border: isLight ? '1px solid rgba(0,0,0,0.06)' : '1px solid rgba(255,255,255,0.06)' }}>
         {[
+          { id: 'home', label: '🏠 Home' },
           { id: 'about', label: 'ℹ️ About' },
           { id: 'docs', label: '📚 How-To & Docs' },
         ].map((tab) => (
@@ -70,7 +71,7 @@ export default function LandingHeader({ activeTab, setActiveTab }: LandingHeader
             key={tab.id}
             onClick={() => setActiveTab(tab.id as LandingTab)}
             style={{
-              padding: '8px 20px',
+              padding: '8px 18px',
               borderRadius: '8px',
               border: 'none',
               background: activeTab === tab.id ? (isLight ? 'rgba(2, 132, 199, 0.12)' : 'rgba(0, 229, 255, 0.15)') : 'transparent',

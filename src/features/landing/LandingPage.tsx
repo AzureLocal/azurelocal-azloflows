@@ -3,7 +3,7 @@ import { useEditorStore } from '@/state/useEditorStore';
 import LandingHeader, { type LandingTab } from '@/features/landing/LandingHeader';
 
 export default function LandingPage() {
-  const [activeTab, setActiveTab] = useState<LandingTab>('about');
+  const [activeTab, setActiveTab] = useState<LandingTab>('home');
   const [aboutSubTab, setAboutSubTab] = useState<'overview' | 'releasenotes' | 'changelog' | 'roadmap' | 'credits'>('overview');
   const [docsCategory, setDocsCategory] = useState<'cabling' | 'logical' | 'auditor' | 'exporter'>('cabling');
   const setActiveView = useEditorStore((state) => state.setActiveView);
@@ -51,6 +51,142 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
+
+        {/* HOME PAGE (Clean Hero & Features — NO Left Sidebar Here!) */}
+        {activeTab === 'home' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+            {/* Hero Section */}
+            <div style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <div
+                style={{
+                  alignSelf: 'center',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '6px 16px',
+                  borderRadius: '20px',
+                  background: 'rgba(0, 229, 255, 0.1)',
+                  border: '1px solid rgba(0, 229, 255, 0.3)',
+                  color: '#00e5ff',
+                  fontSize: '12px',
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                }}
+              >
+                <span>⚡ Version 0.9.0-preview (Active Development)</span>
+              </div>
+
+              <h1
+                style={{
+                  fontSize: '48px',
+                  fontWeight: 900,
+                  lineHeight: 1.1,
+                  letterSpacing: '-1.5px',
+                  margin: 0,
+                  color: isLight ? '#0f172a' : '#ffffff',
+                }}
+              >
+                Enterprise Azure Local & Hyper-V Infrastructure Designer
+              </h1>
+
+              <p style={{ fontSize: '18px', color: isLight ? '#475569' : '#94a3b8', lineHeight: 1.6, margin: 0 }}>
+                Design physical node-to-switch topologies, logical HCI VLAN isolation, SET team port cabling, and run automated pre-flight compliance audits before deployment.
+              </p>
+
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '12px' }}>
+                <button
+                  onClick={() => setActiveView('designer')}
+                  style={{
+                    padding: '14px 32px',
+                    borderRadius: '12px',
+                    border: 'none',
+                    background: 'linear-gradient(135deg, #00e5ff 0%, #3b82f6 100%)',
+                    color: '#0f172a',
+                    fontWeight: 800,
+                    fontSize: '16px',
+                    cursor: 'pointer',
+                    boxShadow: '0 0 30px rgba(0, 229, 255, 0.4)',
+                  }}
+                >
+                  🚀 Launch Canvas Designer
+                </button>
+
+                <button
+                  onClick={() => {
+                    setActiveView('designer');
+                    setWizardOpen(true);
+                  }}
+                  style={{
+                    padding: '14px 32px',
+                    borderRadius: '12px',
+                    border: isLight ? '1px solid #cbd5e1' : '1px solid rgba(255, 255, 255, 0.2)',
+                    background: isLight ? '#ffffff' : 'rgba(255, 255, 255, 0.05)',
+                    color: isLight ? '#0f172a' : '#ffffff',
+                    fontWeight: 700,
+                    fontSize: '16px',
+                    cursor: 'pointer',
+                  }}
+                >
+                  🧙 Guided 5-Step Cluster Wizard
+                </button>
+              </div>
+            </div>
+
+            {/* Feature Highlights Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
+              {[
+                {
+                  icon: '🖥️',
+                  title: 'OEM Server & Switch Catalog',
+                  desc: 'Pre-configured hardware profiles for Dell PowerEdge AX-760, AX-660, AX-770, AX-670, Arista 7050SX3, Cisco Nexus 9300, and Opengear console managers.',
+                },
+                {
+                  icon: '🔌',
+                  title: '2.5D Port Cabling Geometry',
+                  desc: 'Pin-level SFP28/QSFP28 port coordinate anchors, cable media classification (DAC 25G/100G, MMF, Cat6A, RS-232), and SET team glowing overlays.',
+                },
+                {
+                  icon: '🌐',
+                  title: 'Logical HCI VLAN Boundaries',
+                  desc: 'Multi-layer view HUD ([ 🔌 Physical ], [ 🌐 Logical ], [ 🔀 Hybrid ]) with overlaid HCI VLAN zones (Management 711, Compute 712, Storage 713/714) and MTU 9000 badges.',
+                },
+                {
+                  icon: '🛡️',
+                  title: 'Pre-Flight Compliance Auditor',
+                  desc: 'Automated compliance rule engine checking dual-ToR redundancy, storage MTU 9000 jumbo frames, SET team port balance, and OOB management connectivity.',
+                },
+                {
+                  icon: '📊',
+                  title: 'Cabling & Port Map Exports',
+                  desc: 'Export Technician Cabling Schedules in CSV format and Switch Port Map specs in TXT format for seamless datacenter deployment handoff.',
+                },
+                {
+                  icon: '🧙',
+                  title: 'Guided Setup Wizard',
+                  desc: '5-step interactive wizard assistant generating pre-wired, pre-validated Azure Local cluster topologies in seconds.',
+                },
+              ].map((feat, i) => (
+                <div
+                  key={i}
+                  style={{
+                    background: isLight ? '#ffffff' : 'rgba(255, 255, 255, 0.02)',
+                    border: isLight ? '1px solid #cbd5e1' : '1px solid rgba(255, 255, 255, 0.08)',
+                    borderRadius: '16px',
+                    padding: '24px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '12px',
+                  }}
+                >
+                  <div style={{ fontSize: '28px' }}>{feat.icon}</div>
+                  <h3 style={{ fontSize: '18px', fontWeight: 700, margin: 0, color: isLight ? '#0f172a' : '#f1f5f9' }}>{feat.title}</h3>
+                  <p style={{ fontSize: '14px', color: isLight ? '#475569' : '#94a3b8', lineHeight: 1.5, margin: 0 }}>{feat.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* ABOUT PAGE (With Left Vertical Navigation Sidebar) */}
         {activeTab === 'about' && (
