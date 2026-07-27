@@ -23,7 +23,31 @@ export default function LandingPage() {
       <LandingHeader activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* Main Content Body */}
-      <main style={{ flex: 1, maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '40px 24px' }}>
+      <main style={{ flex: 1, maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '32px 24px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
+        {/* Work-In-Progress Development Banner */}
+        <div
+          style={{
+            background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(217, 119, 6, 0.08) 100%)',
+            border: '1px solid rgba(245, 158, 11, 0.4)',
+            borderRadius: '12px',
+            padding: '16px 20px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '16px',
+            boxShadow: '0 0 20px rgba(245, 158, 11, 0.15)',
+          }}
+        >
+          <div style={{ fontSize: '24px' }}>🚧</div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: '14px', fontWeight: 800, color: '#f59e0b', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              Active Development Notice — Project In Progress
+            </div>
+            <div style={{ fontSize: '13px', color: '#cbd5e1', marginTop: '2px', lineHeight: 1.5 }}>
+              This site is under continuous rapid development and iteration. Features, hardware profiles, export schemas, and tools are subject to frequent updates. Expect experimental features to evolve.
+            </div>
+          </div>
+        </div>
+
         {/* OVERVIEW TAB */}
         {activeTab === 'overview' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
@@ -158,6 +182,46 @@ export default function LandingPage() {
                   <p style={{ fontSize: '14px', color: '#94a3b8', lineHeight: 1.5, margin: 0 }}>{feat.desc}</p>
                 </div>
               ))}
+            </div>
+
+            {/* Upstream Open-Source Credits & Acknowledgements Card */}
+            <div
+              style={{
+                background: 'rgba(255, 255, 255, 0.02)',
+                border: '1px solid rgba(59, 130, 246, 0.3)',
+                borderRadius: '16px',
+                padding: '28px',
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '20px',
+              }}
+            >
+              <div
+                style={{
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '12px',
+                  background: 'rgba(59, 130, 246, 0.15)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '22px',
+                  flexShrink: 0,
+                }}
+              >
+                ❤️
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <h3 style={{ fontSize: '18px', fontWeight: 800, margin: 0, color: '#60a5fa' }}>
+                  Upstream Open-Source Acknowledgements & Credits
+                </h3>
+                <p style={{ fontSize: '14px', color: '#cbd5e1', lineHeight: 1.6, margin: 0 }}>
+                  <strong>AzLoFlows</strong> was originally created by <strong>Cristian Edwards Sabathe</strong> (<a href="https://github.com/CristianEdwards/AzLoFlows" target="_blank" rel="noopener noreferrer" style={{ color: '#00e5ff', textDecoration: 'underline' }}>CristianEdwards/AzLoFlows</a>). We express our sincere gratitude and credit to the original author for building the core isometric diagram canvas and scenario flow visualization engine under the MIT License.
+                </p>
+                <p style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5, margin: 0 }}>
+                  This enhanced enterprise edition (<a href="https://github.com/AzureLocal/azurelocal-azloflows" target="_blank" rel="noopener noreferrer" style={{ color: '#38bdf8', textDecoration: 'underline' }}>AzureLocal/azurelocal-azloflows</a>) extends the foundational project with OEM server profiles (Dell PowerEdge AX-760/660/770/670), physical port cabling geometry, SET teaming overlays, multi-layer view toggles, real-time compliance auditing rules, and technician schedule exporters.
+                </p>
+              </div>
             </div>
           </div>
         )}
