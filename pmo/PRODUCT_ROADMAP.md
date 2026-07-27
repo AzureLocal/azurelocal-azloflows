@@ -2,7 +2,7 @@
 
 ## Roadmap Overview
 
-This roadmap defines the implementation sequence for transforming **AzureLocal AzLoFlows** into a comprehensive Logical and Physical Network Builder. The plan is divided into **five tactical phases**, starting with core UI & component additions and culminating in automated verification engines and enterprise BOM reporting.
+This roadmap defines the implementation sequence for transforming **Azure Local Draftsman** into a comprehensive Logical and Physical Network Builder. The plan is divided into **five tactical phases**, starting with core UI & component additions and culminating in automated verification engines and enterprise BOM reporting.
 
 ---
 

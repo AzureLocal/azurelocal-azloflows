@@ -43,7 +43,7 @@ type ClipboardPayload =
   | { type: 'text'; entities: TextEntity[] }
   | { type: 'pipe'; entities: PipeEntity[] };
 
-const CLIPBOARD_MARKER = 'azloflows:clipboard:';
+const CLIPBOARD_MARKER = 'draftsman:clipboard:';
 
 export interface WizardTopologyConfig {
   nodeCount: 2 | 4 | 8;
@@ -248,7 +248,7 @@ export const useEditorStore = create<EditorStore>((set: any, get: any) => ({
   toasts: [],
   history: { past: [], future: [] },
   activeScenario: null,
-  theme: (localStorage.getItem('azloflows_theme') as 'dark' | 'light') || 'dark',
+  theme: ((localStorage.getItem('draftsman_theme') || localStorage.getItem('azloflows_theme') || localStorage.getItem('isoflows_theme')) as 'dark' | 'light') || 'dark',
   viewMode: 'hybrid',
   activeFlowSources: new Set(FLOW_SOURCES.map((f) => f.id)),
   activeFlowTypes: new Set(FLOW_TYPES.map((f) => f.id)),

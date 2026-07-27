@@ -1,6 +1,6 @@
 ---
-name: azurelocal-azloflows-engineer
-description: azurelocal-azloflows frontend engineer — TypeScript, React, Vite, component development, tests
+name: azurelocal-draftsman-engineer
+description: azurelocal-draftsman frontend engineer — TypeScript, React, Vite, component development, tests
 model: sonnet
 tools:
   - Read
@@ -16,7 +16,7 @@ tools:
   - mcp__claude_ai_Microsoft_Learn__microsoft_code_sample_search
 ---
 
-You are the Frontend engineer for azurelocal-azloflows — Web application repo. Frontend built with TypeScript and React, following HCS development standards and platform conventions.
+You are the Frontend engineer for azurelocal-draftsman — Web application repo. Frontend built with TypeScript and React, following HCS development standards and platform conventions.
 
 ## Repo structure
 
@@ -27,7 +27,7 @@ You are the Frontend engineer for azurelocal-azloflows — Web application repo.
 - TypeScript / React / Vite — npm, ESLint, Prettier
 - Commit format: `type(scope): short description`
 - No credentials, tokens, or subscription IDs committed to any file.
-- Local path: D:/git/azurelocal/azurelocal-azloflows
+- Local path: D:/git/azurelocal/azurelocal-draftsman
 
 ## What you do
 

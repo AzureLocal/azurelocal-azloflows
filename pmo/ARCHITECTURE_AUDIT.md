@@ -1,8 +1,8 @@
-# Technical Architecture Audit: AzureLocal AzLoFlows
+# Technical Architecture Audit: Azure Local Draftsman
 
 ## Executive Overview
 
-This document presents a comprehensive technical audit of the **AzureLocal AzLoFlows** codebase. The audit evaluates the system architecture, state management, rendering pipeline, component hierarchy, and data schemas to establish the foundation for extending the platform into an Enterprise Infrastructure & Network Layout Builder.
+This document presents a comprehensive technical audit of the **Azure Local Draftsman** codebase. The audit evaluates the system architecture, state management, rendering pipeline, component hierarchy, and data schemas to establish the foundation for extending the platform into an Enterprise Infrastructure & Network Layout Builder.
 
 ---
 

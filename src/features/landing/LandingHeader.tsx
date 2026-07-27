@@ -52,10 +52,10 @@ export default function LandingHeader({ activeTab, setActiveTab }: LandingHeader
         </div>
         <div>
           <div style={{ fontSize: '18px', fontWeight: 900, letterSpacing: '-0.5px', color: isLight ? '#0f172a' : '#ffffff' }}>
-            AzLoFlows
+            Draftsman
           </div>
           <div style={{ fontSize: '10px', fontWeight: 700, color: isLight ? '#0284c7' : '#00e5ff', textTransform: 'uppercase', letterSpacing: '1px' }}>
-            Azure Local Architecture Portal
+            Azure Local & Hyper-V Studio
           </div>
         </div>
       </div>

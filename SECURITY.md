@@ -2,7 +2,7 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in AzLoFlows, please report it
+If you discover a security vulnerability in Azure Local Draftsman, please report it
 responsibly:
 
 1. **Do not** open a public GitHub issue for security vulnerabilities
@@ -20,7 +20,7 @@ We will acknowledge receipt within 48 hours and provide a timeline for a fix.
 
 ## Security Considerations
 
-- AzLoFlows runs entirely in the browser — no data is transmitted to external
+- Azure Local Draftsman runs entirely in the browser — no data is transmitted to external
   servers
 - Diagram data is stored in browser `localStorage`
 - Exported files (SVG, PNG, JSON) are generated client-side

@@ -1,6 +1,6 @@
-# AzLoFlows Product Backlog & Expansion Strategy
+# Azure Local Draftsman Product Backlog & Expansion Strategy
 
-This document tracks planned feature epics, architectural enhancements, and expansion initiatives for the **AzLoFlows Isometric Diagram Builder**. While current releases (v1.0 – v1.6) focus on Azure Local physical node cabling, logical HCI VLAN profiles, and pre-flight auditor compliance, the platform vision extends across full-stack enterprise architecture, application flowcharts, storage arrays, security appliances, and automated deployment code generation.
+This document tracks planned feature epics, architectural enhancements, and expansion initiatives for **Azure Local Draftsman**. While current releases (v1.0 – v1.6) focus on Azure Local physical node cabling, logical HCI VLAN profiles, and pre-flight auditor compliance, the platform vision extends across full-stack enterprise architecture, application flowcharts, storage arrays, security appliances, and automated deployment code generation.
 
 ---
 

@@ -1,22 +1,22 @@
-# AzLoFlows — Isometric Diagram Builder for Azure Local
+# Azure Local Draftsman — Interactive 2.5D Infrastructure & Compliance Studio
 
-[![Validate](https://github.com/CristianEdwards/AzLoFlows/actions/workflows/validate.yml/badge.svg)](https://github.com/CristianEdwards/AzLoFlows/actions/workflows/validate.yml)
-[![Deploy](https://github.com/CristianEdwards/AzLoFlows/actions/workflows/deploy.yml/badge.svg)](https://github.com/CristianEdwards/AzLoFlows/actions/workflows/deploy.yml)
+[![Validate](https://github.com/AzureLocal/azurelocal-draftsman/actions/workflows/validate.yml/badge.svg)](https://github.com/AzureLocal/azurelocal-draftsman/actions/workflows/validate.yml)
+[![Deploy](https://github.com/AzureLocal/azurelocal-draftsman/actions/workflows/deploy.yml/badge.svg)](https://github.com/AzureLocal/azurelocal-draftsman/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-AzLoFlows is a free, open-source, browser-based isometric diagram builder purpose-built for visualizing **Azure Local** (formerly Azure Stack HCI) network architectures and traffic flows.
+**Azure Local Draftsman** is a free, open-source, browser-based 2.5D visual architecture editor and pre-flight compliance auditor purpose-built for **Azure Local** and **Hyper-V** network infrastructure deployments.
 
-It renders infrastructure components — firewalls, proxies, Arc gateways, clusters, VMs, private endpoints, and more — as isometric 3D cards on a dark-themed canvas, connected by animated flow lines representing real network paths. The tool helps IT architects, cloud engineers, and technical decision-makers understand and communicate how traffic moves through Azure Local deployments under different configurations.
+It renders physical hardware components — Dell PowerEdge servers, Arista/Cisco ToR switches, Opengear console servers, and logical HCI VLAN boundaries — as 2.5D isometric shapes on a sleek dark-themed canvas, connected by pin-level port cables. The tool helps infrastructure architects, systems engineers, and datacenter technicians design, validate, and export production cabling manifests.
 
 > **No sign-up. No server. Runs entirely in your browser.**
 
-![Azure Local Public Path — Proxy + Arc Gateway scenario with all traffic sources and types enabled](docs/screenshot-public-path-proxy-arc.png)
+![Azure Local Public Path — Proxy + Arc Gateway scenario](docs/screenshot-public-path-proxy-arc.png)
 
-## Live Demo
+## Live Portal
 
-**Try it now: [https://cristianedwards.github.io/AzLoFlows/](https://cristianedwards.github.io/AzLoFlows/)**
+**Try it now: [https://azurelocal.cloud/azurelocal-draftsman/](https://azurelocal.cloud/azurelocal-draftsman/)**
 
-## Why AzLoFlows?
+## Why Azure Local Draftsman?
 
 Azure Local deployments involve complex traffic flows across on-premises infrastructure and Azure cloud services. Understanding how traffic routes through proxies, Arc gateways, private endpoints, and public paths is critical for security reviews, architecture decisions, and stakeholder communication.
 

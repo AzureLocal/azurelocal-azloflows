@@ -6,10 +6,10 @@ import '@/styles/globals.css';
 
 /* ── Global error tracking ─────────────────────────────── */
 window.addEventListener('error', (e) => {
-  console.error('[AzLoFlows] Uncaught error:', e.message, e.filename, e.lineno);
+  console.error('[Draftsman] Uncaught error:', e.message, e.filename, e.lineno);
 });
 window.addEventListener('unhandledrejection', (e) => {
-  console.error('[AzLoFlows] Unhandled promise rejection:', e.reason);
+  console.error('[Draftsman] Unhandled promise rejection:', e.reason);
 });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

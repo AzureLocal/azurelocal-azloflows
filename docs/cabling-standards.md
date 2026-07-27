@@ -46,4 +46,4 @@ To prevent single points of failure (SPOF) and support zero-downtime switch firm
 Azure Local utilizes **Switch Embedded Teaming (SET)** at the Hyper-V vSwitch layer instead of traditional LACP / LAG port channeling.
 
 - **Load Balancing Algorithm**: Dynamic or Hyper-V Port mode.
-- **Port Isolation**: Physical ports bound to the SET team are overlaid on the AzLoFlows isometric canvas with a glowing cyan boundary line.
+- **Port Isolation**: Physical ports bound to the SET team are overlaid on the Draftsman isometric canvas with a glowing cyan boundary line.

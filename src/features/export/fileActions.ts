@@ -1365,7 +1365,7 @@ function buildInteractiveHtml(svgContent: string, docJson: string, title: string
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${title} � AzLoFlows Diagram</title>
+<title>${title} — Draftsman Diagram</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { height: 100%; overflow: hidden; font-family: Inter, -apple-system, sans-serif; }
@@ -1386,7 +1386,8 @@ function buildInteractiveHtml(svgContent: string, docJson: string, title: string
 <div class="container">
   <div class="toolbar">
     <h1>${title}</h1>
-    <span class="badge">AzLoFlows Interactive Export</span>
+    <span class="badge">Draftsman Interactive Export</span>
+    <button onclick="resetView()">Reset View</button>
     <button onclick="resetView()">Reset View</button>
     <button onclick="zoomIn()">Zoom In</button>
     <button onclick="zoomOut()">Zoom Out</button>

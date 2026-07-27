@@ -1,6 +1,7 @@
 import type { DiagramDocument } from '@/types/document';
 
-const SNAPSHOTS_KEY = 'isoflows.snapshots';
+const SNAPSHOTS_KEY = 'draftsman.snapshots';
+const LEGACY_SNAPSHOTS_KEYS = ['isoflows.snapshots', 'azloflows.snapshots'];
 const MAX_SNAPSHOTS = 30;
 
 export interface VersionSnapshot {
@@ -27,7 +28,13 @@ export function saveSnapshot(document: DiagramDocument, name?: string): VersionS
 
 export function loadSnapshots(): VersionSnapshot[] {
   try {
-    const raw = localStorage.getItem(SNAPSHOTS_KEY);
+    let raw = localStorage.getItem(SNAPSHOTS_KEY);
+    if (!raw) {
+      for (const legacyKey of LEGACY_SNAPSHOTS_KEYS) {
+        raw = localStorage.getItem(legacyKey);
+        if (raw) break;
+      }
+    }
     return raw ? JSON.parse(raw) : [];
   } catch {
     return [];

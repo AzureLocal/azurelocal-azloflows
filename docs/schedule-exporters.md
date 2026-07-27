@@ -1,6 +1,6 @@
 # Cabling Schedule CSV & Switch Port Map Exporters
 
-AzLoFlows allows datacenter engineers to export production-ready installation manifests directly from diagram topologies.
+Azure Local Draftsman allows datacenter engineers to export production-ready installation manifests directly from diagram topologies.
 
 ---
 

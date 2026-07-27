@@ -1,6 +1,6 @@
-# AzLoFlows Public Technical Documentation Hub
+# Azure Local Draftsman Public Technical Documentation Hub
 
-Welcome to the **AzLoFlows** public documentation library. This documentation set provides technical reference guides for designing, wiring, isolating, and validating enterprise **Azure Local** (formerly Azure Stack HCI) and Hyper-V cluster network architectures.
+Welcome to the **Azure Local Draftsman** public documentation library. This documentation set provides technical reference guides for designing, wiring, isolating, and validating enterprise **Azure Local** and Hyper-V cluster network architectures.
 
 ---
 

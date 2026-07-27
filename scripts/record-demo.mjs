@@ -1,5 +1,5 @@
 /**
- * Playwright script to record a ~30-second demo video of AzLoFlows
+ * Playwright script to record a ~30-second demo video of Azure Local Draftsman
  * showing the Public Path scenario with Proxy + Arc gateway,
  * enabling Hosts → ARB → AKS → VM without proxy, then cycling
  * through traffic types.
@@ -13,7 +13,7 @@
 
 import { chromium } from '@playwright/test';
 
-const BASE = 'http://localhost:8125/AzLoFlows/';
+const BASE = 'http://localhost:8125/azurelocal-draftsman/';
 const VIDEO_DIR = './docs/demo-video';
 // 1080p — LinkedIn recommended resolution (supports 256×144 to 4096×2304)
 const VIEWPORT = { width: 1920, height: 1080 };
@@ -110,5 +110,5 @@ const pause = (ms = 800) => new Promise((r) => setTimeout(r, ms));
 
   console.log(`\n✅ Demo video saved to: ${VIDEO_DIR}/`);
   console.log('The .webm file can be uploaded directly to LinkedIn.');
-  console.log('To convert to .mp4:  ffmpeg -i <file>.webm -c:v libx264 -crf 23 azloflows-demo.mp4');
+  console.log('To convert to .mp4:  ffmpeg -i <file>.webm -c:v libx264 -crf 23 draftsman-demo.mp4');
 })();

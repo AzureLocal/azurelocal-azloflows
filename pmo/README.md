@@ -1,12 +1,12 @@
 # Enterprise Infrastructure & Network Flow Architect (EINFA) - PMO Workspace
 
-Welcome to the **Project Management Office (PMO)** documentation repository for transforming **AzureLocal AzLoFlows** into an enterprise-grade **Logical & Physical Network Infrastructure Layout Builder**.
+Welcome to the **Project Management Office (PMO)** documentation repository for transforming **Azure Local Draftsman** into an enterprise-grade **Logical & Physical Network Infrastructure Layout Builder**.
 
 ---
 
-## Executive Summary
+## Executive Overview
 
-**AzLoFlows** began as an interactive isometric diagram builder for visualizing Azure Local network architectures and traffic flows. The objective of this transformation initiative is to extend the platform's core 2.5D isometric engine into a comprehensive, general-purpose solution architecture tool.
+**Azure Local Draftsman** began as an interactive isometric diagram builder for visualizing Azure Local network architectures and traffic flows. The objective of this transformation initiative is to extend the platform's core 2.5D isometric engine into a comprehensive, general-purpose solution architecture tool.
 
 This platform will allow Solutions Architects, Systems Engineers, Datacenter Operations, and Network Engineers to model:
 - **Physical Topologies:** Hyper-V and Azure Local HCI cluster nodes, Top-of-Rack (ToR) switch pairs, management switches, patch panels, Host NICs, SFP+/DAC/Fiber cabling, and SET (Switch Embedded Teaming) configurations.

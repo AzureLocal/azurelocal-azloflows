@@ -1,4 +1,4 @@
-# azurelocal-azloflows — Claude Code
+# azurelocal-draftsman — Claude Code
 
 @AGENTS.md
 

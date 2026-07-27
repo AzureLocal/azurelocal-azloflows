@@ -1,4 +1,4 @@
-# azurelocal-azloflows — Agent instructions
+# azurelocal-draftsman — Agent instructions
 
 <!--
   AGENTS.md is the canonical, cross-tool instruction file for this repo.
@@ -25,7 +25,7 @@ standards, hard rules, and orchestration guidance.
 **At session start, call:**
 
 ```
-bootstrap(repo="azurelocal-azloflows", client="<your client: claude-code | codex | gemini | cursor | vscode>")
+bootstrap(repo="azurelocal-draftsman", client="<your client: claude-code | codex | gemini | cursor | vscode>")
 ```
 
 It returns this repo's scope, the applicable hard rules, the index of applicable

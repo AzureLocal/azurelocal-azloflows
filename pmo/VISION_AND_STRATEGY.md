@@ -2,7 +2,7 @@
 
 ## Strategic Vision
 
-The goal of this initiative is to transform **AzureLocal AzLoFlows** from a specialized scenario viewer into an **Enterprise Infrastructure & Network Flow Architect (EINFA)**—the definitive tool for designing, documenting, verifying, and presenting complex physical and logical network architectures.
+The goal of this initiative is to transform **Azure Local Draftsman** from a specialized scenario viewer into an **Enterprise Infrastructure & Network Flow Architect (EINFA)**—the definitive tool for designing, documenting, verifying, and presenting complex physical and logical network architectures.
 
 Solutions Engineers, Systems Architects, Datacenter Ops, and Network Consultants require a tool that bridges the gap between **high-level logical diagrams** (what connects to what conceptually) and **low-level physical execution** (which physical port plugs into which switch, with which VLAN, MTU, and team configuration).
 

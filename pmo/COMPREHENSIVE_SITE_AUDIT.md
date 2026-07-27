@@ -1,17 +1,17 @@
-# Comprehensive Site & Technical Architecture Audit: AzLoFlows
+# Comprehensive Site & Technical Architecture Audit: Azure Local Draftsman
 
 **Audit Date:** July 2026  
-**Target Repository:** `AzureLocal/azurelocal-azloflows`  
-**Live Site URL:** [https://azurelocal.cloud/azurelocal-azloflows/](https://azurelocal.cloud/azurelocal-azloflows/)  
+**Target Repository:** `AzureLocal/azurelocal-draftsman`  
+**Live Site URL:** [https://azurelocal.cloud/azurelocal-draftsman/](https://azurelocal.cloud/azurelocal-draftsman/)  
 **Auditor:** AI Systems Architect & Technical Governance Team  
 
 ---
 
 ## 1. Executive Summary
 
-This comprehensive audit evaluates the **AzLoFlows** web application codebase, user experience, rendering engine, type safety, SEO/accessibility compliance, and deployment pipelines. 
+This comprehensive audit evaluates the **Azure Local Draftsman** web application codebase, user experience, rendering engine, type safety, SEO/accessibility compliance, and deployment pipelines. 
 
-AzLoFlows is an enterprise-grade **Azure Local & Hyper-V Infrastructure Designer & Network Flow Simulator**. It combines a modern glassmorphism **Landing Portal**, a 5-step **Guided Setup Wizard**, an **Isometric 2.5D Vector Canvas Engine**, a real-time **Pre-Flight Compliance Auditor Engine**, and **Cabling Schedule CSV / Switch Port Map TXT Exporters**.
+Azure Local Draftsman is an enterprise-grade **Azure Local & Hyper-V Infrastructure Designer & Network Flow Simulator**. It combines a modern glassmorphism **Landing Portal**, a 5-step **Guided Setup Wizard**, an **Isometric 2.5D Vector Canvas Engine**, a real-time **Pre-Flight Compliance Auditor Engine**, and **Cabling Schedule CSV / Switch Port Map TXT Exporters**.
 
 Overall, the site achieves a **High Architectural Grade (A+)** with clean modular TypeScript code, 100% type safety, zero ESLint errors, automated CI/CD deployment pipelines, and rich modern design aesthetics.
 

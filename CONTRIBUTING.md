@@ -1,6 +1,6 @@
-# Contributing to AzLoFlows
+# Contributing to Azure Local Draftsman
 
-Thank you for your interest in contributing to AzLoFlows! This document provides
+Thank you for your interest in contributing to Azure Local Draftsman! This document provides
 guidelines for contributing to the project.
 
 ## Getting Started

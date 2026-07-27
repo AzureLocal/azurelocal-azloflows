@@ -2,8 +2,11 @@ import { isValidAnchorId } from '@/lib/geometry/anchors';
 import type { AnchorId, DiagramDocument, FlowSourceRules, NodeEntity, NodeShape } from '@/types/document';
 import { DOCUMENT_VERSION } from '@/types/document';
 
-const STORAGE_KEY = 'isoflows.diagram.document';
-const RECENT_KEY = 'isoflows.recent';
+const STORAGE_KEY = 'draftsman.diagram.document';
+const LEGACY_STORAGE_KEYS = ['isoflows.diagram.document', 'azloflows.diagram.document'];
+
+const RECENT_KEY = 'draftsman.recent';
+const LEGACY_RECENT_KEYS = ['isoflows.recent', 'azloflows.recent'];
 const MAX_RECENT = 10;
 
 function isRecordOfStringArrays(v: unknown): v is Record<string, string[]> {
@@ -39,7 +42,13 @@ function trackRecent(document: DiagramDocument): void {
 
 export function loadRecent(): RecentEntry[] {
   try {
-    const raw = localStorage.getItem(RECENT_KEY);
+    let raw = localStorage.getItem(RECENT_KEY);
+    if (!raw) {
+      for (const legacyKey of LEGACY_RECENT_KEYS) {
+        raw = localStorage.getItem(legacyKey);
+        if (raw) break;
+      }
+    }
     return raw ? JSON.parse(raw) : [];
   } catch {
     return [];
@@ -47,7 +56,13 @@ export function loadRecent(): RecentEntry[] {
 }
 
 export function loadDocument(): DiagramDocument | null {
-  const raw = localStorage.getItem(STORAGE_KEY);
+  let raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) {
+    for (const legacyKey of LEGACY_STORAGE_KEYS) {
+      raw = localStorage.getItem(legacyKey);
+      if (raw) break;
+    }
+  }
   if (!raw) {
     return null;
   }

@@ -1,4 +1,4 @@
-# GitHub Actions workflow for AzLoFlows
+# GitHub Actions workflow for Azure Local Draftsman
 # Runs linting, type-checking, build, and unit tests on push and pull requests
 
 name: Validate
