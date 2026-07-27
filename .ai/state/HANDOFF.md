@@ -3,17 +3,23 @@
 ## Last session
 
 - **What changed and why:**
-  - Removed obsolete v1.0 baseline design brief (`docs/isometric-diagram-builder-brief.md`), initial backlog (`docs/isometric-diagram-builder-backlog.md`), and announcement template (`docs/linkedin-announcement.md`).
-  - The `/docs/` folder now cleanly houses only active public user documentation (`README.md`, `cabling-standards.md`, `logical-hci-vlans.md`, `compliance-auditor.md`, `schedule-exporters.md`, `guided-setup-wizard.md`).
-  - Active enterprise project backlog and site audit are maintained in `/pmo/` (`pmo/BACKLOG.md` & `pmo/COMPREHENSIVE_SITE_AUDIT.md`).
+  - Added dedicated navigation pages on the portal for:
+    - **`ℹ️ About`**: Project overview, active development banner, and core feature grid.
+    - **`📋 Release Notes`**: Comprehensive documentation for v0.9.0-preview (Phase 1 through Phase 5).
+    - **`📜 Change Log`**: Line-by-line commit and release history log.
+    - **`🗺️ Roadmap`**: Forward-looking product roadmap cards (IaC Bicep, ADO Pipeline, SNMP Telemetry).
+    - **`❤️ Credits`**: Dedicated open-source credits page for upstream author **Cristian Edwards Sabathe** (`CristianEdwards/AzLoFlows`), enterprise maintainers, and core libraries (React 19, Zustand v5, Vite 6, TS 5.8).
+  - Removed the low-contrast credits card from the main About landing view as requested by user.
+  - **Fixed Light Mode Theme**: Added `[data-theme='light']` CSS variable overrides in `globals.css` (`--bg`, `--surface`, `--text`, `--border`) and updated `LandingHeader.tsx`, `LandingPage.tsx`, and `.glass-panel` so Light Mode turns the entire portal and canvas interface bright, readable, and responsive.
 - **Files touched:**
-  - `docs/isometric-diagram-builder-backlog.md` (Deleted)
-  - `docs/isometric-diagram-builder-brief.md` (Deleted)
-  - `docs/linkedin-announcement.md` (Deleted)
+  - `src/features/landing/LandingHeader.tsx`
+  - `src/features/landing/LandingPage.tsx`
+  - `src/styles/globals.css`
   - `.ai/state/HANDOFF.md`
 - **Commands run & results:**
-  - `git rm docs/isometric-diagram-builder-backlog.md docs/isometric-diagram-builder-brief.md docs/linkedin-announcement.md`
-  - `git push origin main` (**Pushed to AzureLocal/azurelocal-azloflows**).
+  - `npx tsc -p tsconfig.app.json --noEmit` (**Passed 0 errors**)
+  - `npx vite build` (**Built dist in 6.57s**)
+  - `git push origin main` (**Pushed commit 6660f4a to AzureLocal/azurelocal-azloflows**).
 - **Branch:** `main` — committed & pushed.
 - **GitHub Actions Status:** Green (`completed success`).
 - **Blockers:** None.
