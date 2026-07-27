@@ -614,6 +614,8 @@ export default function CanvasViewport({ canvasRef, onCursorWorldChange, onViewp
               y: event.clientY - (stageRect?.top ?? 0),
             });
           }
+        }}
+      />
       <ViewModeToolbar />
       <CompliancePanel />
       <CanvasOverlay
