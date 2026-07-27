@@ -247,138 +247,86 @@ export default function LandingPage() {
 
             {/* Right Main Content Pane */}
             <div style={{ minWidth: 0 }}>
-              {/* SUB-VIEW 1: OVERVIEW */}
+              {/* SUB-VIEW 1: OVERVIEW & MISSION */}
               {aboutSubTab === 'overview' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-                  {/* Hero Header */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <div
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        padding: '6px 14px',
-                        borderRadius: '20px',
-                        background: 'rgba(0, 229, 255, 0.1)',
-                        border: '1px solid rgba(0, 229, 255, 0.3)',
-                        color: '#00e5ff',
-                        fontSize: '12px',
-                        fontWeight: 700,
-                        textTransform: 'uppercase',
-                        letterSpacing: '1px',
-                        width: 'fit-content',
-                      }}
-                    >
-                      <span>⚡ Version 0.9.0-preview (Active Development)</span>
+                  {/* Header */}
+                  <div>
+                    <div style={{ fontSize: '12px', fontWeight: 800, color: isLight ? '#0284c7' : '#00e5ff', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>
+                      Architecture Platform & Mission
                     </div>
-
-                    <h1
-                      style={{
-                        fontSize: '36px',
-                        fontWeight: 900,
-                        lineHeight: 1.2,
-                        letterSpacing: '-1px',
-                        margin: 0,
-                        color: isLight ? '#0f172a' : '#ffffff',
-                      }}
-                    >
-                      Enterprise Azure Local & Hyper-V Infrastructure Designer
-                    </h1>
-
+                    <h2 style={{ fontSize: '32px', fontWeight: 900, margin: '0 0 12px', color: isLight ? '#0f172a' : '#ffffff', letterSpacing: '-0.5px' }}>
+                      About AzLoFlows
+                    </h2>
                     <p style={{ fontSize: '16px', color: isLight ? '#475569' : '#94a3b8', lineHeight: 1.6, margin: 0 }}>
-                      AzLoFlows enables network architects and systems engineers to visually model physical server-to-switch cabling, logical HCI VLAN isolation boundaries, and run real-time automated pre-flight compliance audits before datacenter deployment.
+                      AzLoFlows is an open-source, interactive 2.5D visual architecture editor and pre-flight compliance engine designed specifically for <strong>Azure Local HCI</strong> and <strong>Hyper-V network infrastructure</strong> deployments.
                     </p>
-
-                    <div style={{ display: 'flex', gap: '16px', marginTop: '8px' }}>
-                      <button
-                        onClick={() => setActiveView('designer')}
-                        style={{
-                          padding: '14px 28px',
-                          borderRadius: '12px',
-                          border: 'none',
-                          background: 'linear-gradient(135deg, #00e5ff 0%, #3b82f6 100%)',
-                          color: '#0f172a',
-                          fontWeight: 800,
-                          fontSize: '15px',
-                          cursor: 'pointer',
-                          boxShadow: '0 0 25px rgba(0, 229, 255, 0.4)',
-                        }}
-                      >
-                        🚀 Launch Canvas Designer
-                      </button>
-
-                      <button
-                        onClick={() => {
-                          setActiveView('designer');
-                          setWizardOpen(true);
-                        }}
-                        style={{
-                          padding: '14px 28px',
-                          borderRadius: '12px',
-                          border: isLight ? '1px solid #cbd5e1' : '1px solid rgba(255, 255, 255, 0.2)',
-                          background: isLight ? '#ffffff' : 'rgba(255, 255, 255, 0.05)',
-                          color: isLight ? '#0f172a' : '#ffffff',
-                          fontWeight: 700,
-                          fontSize: '15px',
-                          cursor: 'pointer',
-                        }}
-                      >
-                        🧙 Guided 5-Step Cluster Wizard
-                      </button>
-                    </div>
                   </div>
 
-                  {/* Feature Highlights Grid */}
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
-                    {[
-                      {
-                        icon: '🖥️',
-                        title: 'OEM Server & Switch Catalog',
-                        desc: 'Pre-configured hardware profiles for Dell PowerEdge AX-760, AX-660, AX-770, AX-670, Arista 7050SX3, Cisco Nexus 9300, and Opengear console managers.',
-                      },
-                      {
-                        icon: '🔌',
-                        title: '2.5D Port Cabling Geometry',
-                        desc: 'Pin-level SFP28/QSFP28 port coordinate anchors, cable media classification (DAC 25G/100G, MMF, Cat6A, RS-232), and SET team glowing overlays.',
-                      },
-                      {
-                        icon: '🌐',
-                        title: 'Logical HCI VLAN Boundaries',
-                        desc: 'Multi-layer view HUD ([ 🔌 Physical ], [ 🌐 Logical ], [ 🔀 Hybrid ]) with overlaid HCI VLAN zones (Management 711, Compute 712, Storage 713/714) and MTU 9000 badges.',
-                      },
-                      {
-                        icon: '🛡️',
-                        title: 'Pre-Flight Compliance Auditor',
-                        desc: 'Automated compliance rule engine checking dual-ToR redundancy, storage MTU 9000 jumbo frames, SET team port balance, and OOB management connectivity.',
-                      },
-                      {
-                        icon: '📊',
-                        title: 'Cabling & Port Map Exports',
-                        desc: 'Export Technician Cabling Schedules in CSV format and Switch Port Map specs in TXT format for seamless datacenter deployment handoff.',
-                      },
-                      {
-                        icon: '🧙',
-                        title: 'Guided Setup Wizard',
-                        desc: '5-step interactive wizard assistant generating pre-wired, pre-validated Azure Local cluster topologies in seconds.',
-                      },
-                    ].map((feat, i) => (
-                      <div
-                        key={i}
-                        style={{
-                          background: isLight ? '#ffffff' : 'rgba(255, 255, 255, 0.02)',
-                          border: isLight ? '1px solid #cbd5e1' : '1px solid rgba(255, 255, 255, 0.08)',
-                          borderRadius: '16px',
-                          padding: '24px',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: '12px',
-                        }}
-                      >
-                        <div style={{ fontSize: '28px' }}>{feat.icon}</div>
-                        <h3 style={{ fontSize: '18px', fontWeight: 700, margin: 0, color: isLight ? '#0f172a' : '#f1f5f9' }}>{feat.title}</h3>
-                        <p style={{ fontSize: '14px', color: isLight ? '#475569' : '#94a3b8', lineHeight: 1.5, margin: 0 }}>{feat.desc}</p>
-                      </div>
-                    ))}
+                  {/* Mission Statement Card */}
+                  <div
+                    style={{
+                      background: isLight ? '#ffffff' : 'rgba(255, 255, 255, 0.03)',
+                      border: isLight ? '1px solid #cbd5e1' : '1px solid rgba(0, 229, 255, 0.3)',
+                      borderRadius: '16px',
+                      padding: '28px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '12px',
+                    }}
+                  >
+                    <h3 style={{ fontSize: '20px', fontWeight: 800, color: isLight ? '#0284c7' : '#00e5ff', margin: 0 }}>
+                      🎯 Core Mission & Problem Solved
+                    </h3>
+                    <p style={{ fontSize: '14px', color: isLight ? '#334155' : '#cbd5e1', lineHeight: 1.7, margin: 0 }}>
+                      Deploying enterprise Azure Local HCI clusters requires strict adherence to physical cabling topology, dual Top-of-Rack (ToR) switch cross-connects, Switch Embedded Teaming (SET) port distribution, and Storage Spaces Direct (S2D) RoCEv2 RDMA traffic isolation. Manual wiring spreadsheets and static 2D diagrams frequently lead to misconfigured ports, single points of failure, and costly deployment delays.
+                    </p>
+                    <p style={{ fontSize: '14px', color: isLight ? '#334155' : '#cbd5e1', lineHeight: 1.7, margin: 0 }}>
+                      AzLoFlows bridges the gap between high-level architectural planning and ground-level physical installation by providing real-time 2.5D canvas visualization, instant compliance validation, and automated cabling schedule exports.
+                    </p>
+                  </div>
+
+                  {/* System Architecture Modules Grid */}
+                  <div>
+                    <h3 style={{ fontSize: '20px', fontWeight: 800, color: isLight ? '#0f172a' : '#ffffff', marginBottom: '16px' }}>
+                      Core System Architecture
+                    </h3>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
+                      {[
+                        {
+                          title: '🎨 2.5D Isometric Vector Engine',
+                          desc: 'Custom HTML5 Canvas 2D rendering pipeline executing 60fps vector projections for server chassis, switches, patch panels, and pin-level SFP28/QSFP28 port coordinates.',
+                        },
+                        {
+                          title: '🛡️ Automated Compliance Auditor',
+                          desc: 'Real-time rule engine evaluating topologies against 5 mandatory network standards (dual-ToR redundancy, storage MTU 9000, SET port balance, and OOB management).',
+                        },
+                        {
+                          title: '🌐 Multi-Layer View Isolation',
+                          desc: 'Multi-layer HUD enabling instant switching between physical port wiring and logical HCI VLAN boundaries (Management 711, Compute 712, Storage 713/714).',
+                        },
+                        {
+                          title: '📄 Datacenter Handoff Exporters',
+                          desc: 'Generates Cabling Schedule CSV manifests for installation technicians and Switch Port Map TXT specs for network engineers configuring Arista EOS or Cisco NX-OS.',
+                        },
+                      ].map((item, idx) => (
+                        <div
+                          key={idx}
+                          style={{
+                            background: isLight ? '#ffffff' : 'rgba(0,0,0,0.3)',
+                            border: isLight ? '1px solid #cbd5e1' : '1px solid rgba(255,255,255,0.06)',
+                            borderRadius: '14px',
+                            padding: '20px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '8px',
+                          }}
+                        >
+                          <h4 style={{ fontSize: '16px', fontWeight: 800, color: isLight ? '#0284c7' : '#00e5ff', margin: 0 }}>{item.title}</h4>
+                          <p style={{ fontSize: '13px', color: isLight ? '#475569' : '#94a3b8', lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
