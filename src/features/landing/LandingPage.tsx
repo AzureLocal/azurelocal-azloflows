@@ -70,7 +70,7 @@ export default function LandingPage() {
                   letterSpacing: '1px',
                 }}
               >
-                <span>⚡ Version 1.6 Production Ready</span>
+                <span>⚡ Version 0.9.0-preview (Active Development)</span>
               </div>
 
               <h1
