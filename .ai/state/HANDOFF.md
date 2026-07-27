@@ -3,23 +3,24 @@
 ## Last session
 
 - **What changed and why:**
-  - Added dedicated navigation pages on the portal for:
-    - **`ℹ️ About`**: Project overview, active development banner, and core feature grid.
-    - **`📋 Release Notes`**: Comprehensive documentation for v0.9.0-preview (Phase 1 through Phase 5).
-    - **`📜 Change Log`**: Line-by-line commit and release history log.
-    - **`🗺️ Roadmap`**: Forward-looking product roadmap cards (IaC Bicep, ADO Pipeline, SNMP Telemetry).
-    - **`❤️ Credits`**: Dedicated open-source credits page for upstream author **Cristian Edwards Sabathe** (`CristianEdwards/AzLoFlows`), enterprise maintainers, and core libraries (React 19, Zustand v5, Vite 6, TS 5.8).
-  - Removed the low-contrast credits card from the main About landing view as requested by user.
-  - **Fixed Light Mode Theme**: Added `[data-theme='light']` CSS variable overrides in `globals.css` (`--bg`, `--surface`, `--text`, `--border`) and updated `LandingHeader.tsx`, `LandingPage.tsx`, and `.glass-panel` so Light Mode turns the entire portal and canvas interface bright, readable, and responsive.
+  - **Cleaned Top Header**: Simplified [`LandingHeader.tsx`](file:///d:/git/azurelocal/azurelocal-azloflows/src/features/landing/LandingHeader.tsx) to only contain **`ℹ️ About`** and **`📚 How-To & Docs`**, removing all cluttered buttons from the top bar.
+  - **Vertical Left Sidebar Navigation on About Page**:
+    - Clicking **`ℹ️ About`** opens a dedicated 2-column layout in [`LandingPage.tsx`](file:///d:/git/azurelocal/azurelocal-azloflows/src/features/landing/LandingPage.tsx).
+    - Features a **Vertical Left Sidebar Navigation Menu** (`260px` sticky menu) with:
+      1. `ℹ️ Overview & Features`
+      2. `📋 Release Notes`
+      3. `📜 Change Logs`
+      4. `🗺️ Product Roadmap`
+      5. `❤️ Credits & License`
+    - Selecting any menu item on the left sidebar updates the right main pane dynamically.
 - **Files touched:**
   - `src/features/landing/LandingHeader.tsx`
   - `src/features/landing/LandingPage.tsx`
-  - `src/styles/globals.css`
   - `.ai/state/HANDOFF.md`
 - **Commands run & results:**
   - `npx tsc -p tsconfig.app.json --noEmit` (**Passed 0 errors**)
-  - `npx vite build` (**Built dist in 6.57s**)
-  - `git push origin main` (**Pushed commit 6660f4a to AzureLocal/azurelocal-azloflows**).
+  - `npx vite build` (**Built dist in 9.69s**)
+  - `git push origin main` (**Pushed commit 94e68bf to AzureLocal/azurelocal-azloflows**).
 - **Branch:** `main` — committed & pushed.
 - **GitHub Actions Status:** Green (`completed success`).
 - **Blockers:** None.
