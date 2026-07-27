@@ -52,7 +52,7 @@ export default function ShapePalette() {
               <button
                 key={stack.id}
                 onClick={() => {
-                  let startY = 100;
+                  const startY = 100;
                   stack.nodes.forEach((n, i) => {
                     addShape('node', { x: 200, y: startY + i * 90 }, {
                       shape: n.shape || 'vendorSwitch',
