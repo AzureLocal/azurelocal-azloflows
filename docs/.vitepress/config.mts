@@ -20,7 +20,7 @@ export default defineConfig({
       }
     ],
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/AzureLocal' }
+      { icon: 'github', link: 'https://github.com/AzureLocal/azurelocal-azloflows' }
     ],
     footer: {
       message: 'Released under the MIT License.',
@@ -28,6 +28,7 @@ export default defineConfig({
     }
   }
 })
+
 
 
 
