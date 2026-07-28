@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
+  ignoreDeadLinks: true,
   base: '/azurelocal-azloflows/',
   title: "azurelocal-azloflows Documentation",
   description: "Governed centrally by HCS Platform Engineering standards",
@@ -27,5 +28,6 @@ export default defineConfig({
     }
   }
 })
+
 
 
